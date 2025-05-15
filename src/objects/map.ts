@@ -1,6 +1,6 @@
 import { Plot } from "./plot"
-import { PlanetaryDefenseSystem } from "../specifics/plot"; 
-import * as Land from "../specifics/land"
+import { PlanetaryDefenseSystem } from "../children/plot"; 
+import * as Land from "../children/land"
 
 export class Map {
     private _grid : Plot[][];
