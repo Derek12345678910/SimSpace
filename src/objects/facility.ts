@@ -8,13 +8,8 @@ export abstract class Facility extends Plot{
     protected _reversePollution: number;
     
 
-    protected constructor(name: string, maintenanceCost: number, powerCost: number, revenue: number, pollution: number, reversePollution: number){
+    protected constructor(name: string){
         super(name);
-        this._maintenaceCost = maintenanceCost
-        this._powerCost = powerCost;
-        this._revenue = revenue;
-        this._pollution = pollution;
-        this._reversePollution = reversePollution;
     }
 
     get maintenanceCost(): number{

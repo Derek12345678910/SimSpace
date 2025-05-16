@@ -7,8 +7,10 @@ export class Store extends CommercialFacility{
     static override buildingName: string = "Store";
     public constructor(x: number, y: number){
         super(Store.buildingName, 50000, 5, 200000, 500, 0)
+
         this._xPosition = x;
         this._yPosition = y;
+        
     }
     public revenueEarned(): number {
         return 1
