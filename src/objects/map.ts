@@ -1,6 +1,6 @@
 import { Plot } from "./plot"
 import { PlanetaryDefenseSystem } from "../children/plotChilds"; 
-import * as Land from "../children/land"
+import * as LandObjects from "../children/landChilds"
 
 export class Map {
     private _grid : Plot[][];
@@ -15,7 +15,7 @@ export class Map {
             this._grid[i] = new Array<Plot>(planetSize);
             this._pollutionGrid[i] = new Array<number>(planetSize);
             for(let j=0; j<planetSize; j++){
-                this._grid[j][i] = new Land.Grass(i, j);
+                this._grid[j][i] = new LandObjects.Grass(i, j);
                 this._pollutionGrid[j][i] = 0;
             }
         }

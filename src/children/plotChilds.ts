@@ -9,6 +9,7 @@ export class PlanetaryDefenseSystem extends Plot{
         super(PlanetaryDefenseSystem.buildingName);
         this._xPosition = x;
         this._yPosition = y;
+
     }
 
     static checkCost(money : number) : boolean {
