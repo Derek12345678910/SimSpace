@@ -2,11 +2,16 @@ import { Industrial } from "../objects/industrial";
 import { Map } from "../objects/map";
 
 
-class Factory extends Industrial{
+export class Factory extends Industrial{
     
-    static buildingName: string = "Factory";
-    static buildCost: number = 50000000;
+    static override buildingName: string = "Factory";
+    static override buildCost: number = 50000000;
     
+    /**
+     * Constructs a factory building
+     * @param x X coordinate of the factory
+     * @param y Y coordinate of the factory
+     */
     public constructor(x: number, y: number){
         super(Factory.buildingName);
 
@@ -37,6 +42,51 @@ class Factory extends Industrial{
         return "true"
     }
     public fullyFunctional(map: Map): string {
+        return "true"
+    }    
+}
+
+export class EnvironmentalFacility extends Industrial{
+    static override buildingName: string = "Environmental Facility";
+    static override buildCost: number = 200000000;
+
+    /**
+     * Constructs an environmental facility
+     * @param x X coordinate of the environmental facility
+     * @param y Y coordinate of the environmental facility
+     */
+    constructor(x: number, y:number){
+        super(EnvironmentalFacility.buildingName);
+
+        this._revenue = 0;
+        this._maintenaceCost = 3000000;
+        this._powerCost = 75;
+        this._pollution = 0;
+        this._reversePollution = 30000;
+
+        this.finalMaintenance = 3000000;
+        this.months = 0;
+        this.finalRevenue = 0;
+
+        this._xPosition = x;
+        this._yPosition = y;
+    }
+    public pollutionReduced(): number{
+        return this._reversePollution;
+    }
+    public override pollutionGenerated(): number {
+        return this._pollution;
+    }
+    public override revenueEarned(): number {
+        return this._revenue;
+    }
+    public override maintenanceLost(): number {
+        return this._maintenaceCost;
+    }
+    static override isBuildable(x: number, y: number, map: Map): string {
+        return "true"
+    }
+    public override fullyFunctional(map: Map): string {
         return "true"
     }    
 }

@@ -1,5 +1,5 @@
 import { Plot } from "./plot"
-import { PlanetaryDefenseSystem } from "../children/plot"; 
+import { PlanetaryDefenseSystem } from "../children/plotChilds"; 
 import * as Land from "../children/land"
 
 export class Map {
