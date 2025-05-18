@@ -60,7 +60,7 @@ class Game {
     public updateNewMonth() : void {
         this.checkEvents();
 
-        
+        this._time ++;
 
         this._score = this.calculateScores();
     }
