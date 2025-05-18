@@ -45,7 +45,12 @@ export class AffordableHome extends Residential{
     }
 
     protected override managePopulation(): void {
-        
+        let newPopulation: number = this._maxPopulation*0.1
+        if(this._happyPopulation + this._contentPopulation + newPopulation > this._maxPopulation){
+            newPopulation = this._maxPopulation - this._happyPopulation - this._contentPopulation;
+        }
+        this._happyPopulation += newPopulation*0.1
+        this._contentPopulation += newPopulation*0.9
     }
 
 }
@@ -94,7 +99,18 @@ export class LuxuryHome extends Residential{
     }
 
     protected override managePopulation(): void {
-        
+        let newPopulation: number;
+        if(!this.fullyFunctional(new Map(50))){
+            newPopulation= 5000*0.1;
+        }
+        else{
+            newPopulation = this._maxPopulation*0.1;
+        }
+        if(this._happyPopulation + this._contentPopulation + newPopulation > this._maxPopulation){
+            newPopulation = this._maxPopulation - this._happyPopulation - this._contentPopulation;
+        }
+        this._happyPopulation += newPopulation/2;
+        this._contentPopulation += newPopulation/2;
     }
 
 }
@@ -143,7 +159,12 @@ export class ComfortableHome extends Residential{
     }
 
     protected override managePopulation(): void {
-        
+        let newPopulation: number = this._maxPopulation*0.1;
+        if(this._happyPopulation + this._contentPopulation + newPopulation > this._maxPopulation){
+            newPopulation = this._maxPopulation - this._happyPopulation - this._contentPopulation;
+        }   
+        this._happyPopulation += newPopulation*0.25
+        this._contentPopulation += newPopulation*0.75
     }
 
 }
