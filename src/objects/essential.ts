@@ -1,12 +1,13 @@
 import { Facility } from "./facility";
+import { Map } from "./map"
 
 export abstract class Essential extends Facility{
     static _reversePollution: number = 0;
     static _pollution: number = 0;
     static _revenue: number = 0;
     protected _powerGeneration: number;
-    constructor(name: string){
-        super(name);
+    protected constructor(name: string, buildCost : number, map : Map){
+        super(name, buildCost, map);
     }
     protected revenueEarned(): number {
         return 0;

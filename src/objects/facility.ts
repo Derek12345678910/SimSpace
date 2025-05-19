@@ -1,4 +1,5 @@
 import { Plot } from "./plot";
+import { Map } from "./map";
 
 export abstract class Facility extends Plot{
     protected _maintenaceCost: number;
@@ -8,8 +9,8 @@ export abstract class Facility extends Plot{
     protected _reversePollution: number;
     
 
-    protected constructor(name: string){
-        super(name);
+    protected constructor(name: string, buildCost : number, map : Map){
+        super(name, buildCost, map);
     }
 
     get maintenanceCost(): number{

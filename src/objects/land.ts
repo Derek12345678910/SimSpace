@@ -1,7 +1,8 @@
 import { Plot } from "./plot";
+import { Map } from "./map"
 
 export abstract class Land extends Plot{
-    public constructor(name : string){
-        super(name)
+    protected constructor(name: string, buildCost : number, map : Map){
+        super(name, buildCost, map);
     }
 }

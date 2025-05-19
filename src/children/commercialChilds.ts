@@ -12,8 +12,8 @@ export class Store extends Commercial{
      * @param x X coordinate of the store
      * @param y Y coordinate of the store
      */
-    public constructor(x: number, y: number){
-        super(Store.buildingName)
+    public constructor(x: number, y: number, map : Map){
+        super(Store.buildingName, Store.buildCost, map)
 
         this._revenue = 200000;
         this._maintenaceCost = 50000;
@@ -51,8 +51,8 @@ export class Office extends Commercial{
      * @param x X coordinate of the office
      * @param y Y coordinate of the office
      */
-    public constructor(x: number, y: number){
-        super(Office.buildingName);
+    public constructor(x: number, y: number, map : Map){
+        super(Office.buildingName, Office.buildCost, map);
 
         this._revenue = 20000;
         this._maintenaceCost = 5000;
@@ -90,8 +90,8 @@ export class Restaurant extends Commercial{
      * @param x X coordinate of the office
      * @param y Y coordinate of the office
      */
-    public constructor(x: number, y: number){
-        super(Restaurant.buildingName)
+    public constructor(x: number, y: number, map : Map){
+        super(Restaurant.buildingName, Restaurant.buildCost, map)
 
         this._revenue = 10000;
         this._maintenaceCost = 5000;
@@ -119,9 +119,3 @@ export class Restaurant extends Commercial{
         return "true"
     }
 }
-
-
-let myStore = new Store(0,0);
-console.log(myStore.pollutionGenerated())
-console.log(Office)
-console.log(Restaurant)

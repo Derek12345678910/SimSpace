@@ -5,8 +5,8 @@ export class Grass extends Land{
     static override buildCost : number = 0;
     static override buildingName : string = "Grass";
 
-    public constructor(x : number, y : number){
-        super(Grass.buildingName);
+    public constructor(x : number, y : number, map : Map){
+        super(Grass.buildingName, Grass.buildCost, map);
         this._xPosition = x;
         this._yPosition = y;
     }
@@ -28,8 +28,8 @@ export class Rock extends Land{
     static override buildCost : number = 0;
     static override buildingName : string = "Rock";
 
-    public constructor(x : number, y : number){
-        super(Rock.buildingName);
+    public constructor(x : number, y : number, map : Map){
+        super(Rock.buildingName, Rock.buildCost, map);
         this._xPosition = x;
         this._yPosition = y;
     }
@@ -51,8 +51,8 @@ export class Tree extends Land{
     static override buildCost : number = 0;
     static override buildingName : string = "Tree";
 
-    public constructor(x : number, y : number){
-        super(Tree.buildingName);
+    public constructor(x : number, y : number, map : Map){
+        super(Tree.buildingName, Tree.buildCost, map);
         this._xPosition = x;
         this._yPosition = y;
     }

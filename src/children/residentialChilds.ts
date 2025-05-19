@@ -5,8 +5,8 @@ export class AffordableHome extends Residential{
     static override buildCost : number = 50000000;
     static override buildingName: string = "Affordable Home"
 
-    constructor(x : number, y : number){
-        super(AffordableHome.buildingName);
+    constructor(x : number, y : number, map : Map){
+        super(AffordableHome.buildingName, AffordableHome.buildCost, map);
 
         this._maxPopulation = 25000;
         this._revenuePerThousand = 10000;
@@ -59,8 +59,8 @@ export class LuxuryHome extends Residential{
     static override buildCost : number = 1000000000;
     static override buildingName: string = "Luxury Home"
 
-    constructor(x : number, y : number){
-        super(LuxuryHome.buildingName);
+    constructor(x : number, y : number, map : Map){
+        super(LuxuryHome.buildingName, LuxuryHome.buildCost, map);
 
         this._maxPopulation = 10000;
         this._revenuePerThousand = 15000000;
@@ -94,13 +94,13 @@ export class LuxuryHome extends Residential{
         return 1;
     }
 
-    public override fullyFunctional(map: Map): string {
+    public override fullyFunctional(): string {
         return "a"
     }
 
     protected override managePopulation(): void {
         let newPopulation: number;
-        if(!this.fullyFunctional(new Map(50))){
+        if(!this.fullyFunctional()){
             newPopulation= 5000*0.1;
         }
         else{
@@ -119,8 +119,8 @@ export class ComfortableHome extends Residential{
     static override buildCost : number = 500000000;
     static override buildingName: string = "Comfortable Home"
 
-    constructor(x : number, y : number){
-        super(ComfortableHome.buildingName);
+    constructor(x : number, y : number, map : Map){
+        super(ComfortableHome.buildingName, ComfortableHome.buildCost, map);
 
         this._maxPopulation = 15000;
         this._revenuePerThousand = 1000000;

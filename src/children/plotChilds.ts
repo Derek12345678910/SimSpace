@@ -5,8 +5,8 @@ export class PlanetaryDefenseSystem extends Plot{
     static override buildCost: number = 1000000000000;
     static override buildingName: string = "Planetary Defense System";
 
-    public constructor(x : number, y : number){
-        super(PlanetaryDefenseSystem.buildingName);
+    public constructor(x : number, y : number, map : Map){
+        super(PlanetaryDefenseSystem.buildingName, PlanetaryDefenseSystem.buildCost, map);
         this._xPosition = x;
         this._yPosition = y;
 

@@ -12,8 +12,8 @@ export class Factory extends Industrial{
      * @param x X coordinate of the factory
      * @param y Y coordinate of the factory
      */
-    public constructor(x: number, y: number){
-        super(Factory.buildingName);
+    public constructor(x: number, y: number, map : Map){
+        super(Factory.buildingName, Factory.buildCost, map);
 
         this._revenue = 0;
         this._maintenaceCost = 0;
@@ -55,8 +55,8 @@ export class EnvironmentalFacility extends Industrial{
      * @param x X coordinate of the environmental facility
      * @param y Y coordinate of the environmental facility
      */
-    constructor(x: number, y:number){
-        super(EnvironmentalFacility.buildingName);
+    constructor(x: number, y:number, map : Map){
+        super(EnvironmentalFacility.buildingName, EnvironmentalFacility.buildCost, map);
 
         this._revenue = 0;
         this._maintenaceCost = 3000000;

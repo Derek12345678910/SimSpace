@@ -5,8 +5,8 @@ export class Warehouse extends Facility{
     static override buildCost: number = 10000000;
     static override buildingName: string = "Warehouse";
 
-    public constructor(x : number, y : number){
-        super(Warehouse.buildingName);
+    public constructor(x : number, y : number, map : Map){
+        super(Warehouse.buildingName, Warehouse.buildCost, map);
 
         this._revenue = 0;
         this._maintenaceCost = 500000;
