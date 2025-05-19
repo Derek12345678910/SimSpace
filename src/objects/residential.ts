@@ -2,7 +2,7 @@ import { Facility } from "./facility";
 
 
 export abstract class Residential extends Facility{
-    protected _startPopulation: number = 0
+    protected _population: number = 0
     protected _maxPopulation: number
     protected _happyPopulation: number = 0
     protected _contentPopulation: number = 0
@@ -14,8 +14,8 @@ export abstract class Residential extends Facility{
         super(name);
     }
 
-    public get startPopulation() : number{
-        return this._startPopulation;
+    public get population() : number{
+        return this._population;
     }
 
     public get maxPopulation() : number{

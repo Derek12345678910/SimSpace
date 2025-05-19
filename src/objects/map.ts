@@ -1,5 +1,12 @@
 import { Plot } from "./plot"
 import { PlanetaryDefenseSystem } from "../children/plotChilds"; 
+
+import { Facility } from "./facility";
+import { Residential } from "./residential";
+import { Commercial } from "./commercial";
+import { Industrial } from "./industrial";
+import { Essential } from "./essential";
+
 import * as LandObjects from "../children/landChilds"
 
 import { Queue } from "../datastructures/queue";
@@ -115,5 +122,29 @@ export class Map {
             }
         }
         return -1; // no target
-    }   
+    }  
+    
+    /**
+     * Check if an object is a facility
+     * @param object object to be checked
+     * @returns true if the object is a facility
+     */
+    public static checkFacility(object : Plot) : boolean {
+        if(object instanceof Facility) { return true; }
+        return false;
+    }
+
+    /**
+     * Check type of plot
+     * @param object object to be checked
+     * @returns the plot type in string
+     */
+    public static checkPlotType(object : Plot) : string {
+        if(object instanceof Residential){ return "Residential"; }
+        else if(object instanceof Essential){ return "Essential"; }
+        else if(object instanceof Industrial){ return "Industrial"; }
+        else if(object instanceof Commercial){ return "Commercial"; }
+        return "None";
+    }
+
 }
