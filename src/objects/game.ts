@@ -1,12 +1,22 @@
 import { Map } from "./map"
 import { Plot } from "./plot"
 import { GlobalEvent } from "./globalevents";
-import * as GlobalEventObjects from "../specifics/globalevents"
+import * as GlobalEventObjects from "../children/eventsChilds"
+
+import { Facility } from "./facility";
+import { Residential } from "./residential";
+import { Commercial } from "./commercial";
+import { Industrial } from "./industrial";
+import { Essential } from "./essential";
 
 import { Pair } from "../datastructures/pair"
 import { List } from "../datastructures/list"
   
-class Game {
+/**
+ * Class for Game Logic
+ */
+export class Game {
+
     private _time : number = 0;
     private _population : number = 0;
     private _happyPopulation : number = 0;
@@ -14,57 +24,107 @@ class Game {
     private _money : number = 5000000000;
     private _pollution : number = 0;
     private _score : number = 0;
-    private _timePerMonth : number = 10;
-    private _map : Map = new Map(50);
+    private _timePerMonth : number;
+    private _map : Map;
 
     private eventCalender : List<Pair> = new List<Pair>();
 
-    public constructor(){}
+    /**
+     * Create the world
+     * @param xLength x length of the map
+     * @param yLength y length of the map
+     * @param timePerMonth time in seconds per month
+     */
+    public constructor(xLength : number, yLength : number, timePerMonth : number){
+        this._map = new Map(xLength, yLength);
+        this._timePerMonth = timePerMonth;
+    }
 
+    /**
+     * @returns current time of the world
+     */
     public get time() : number {
         return this._time;
     }   
 
+    /**
+     * @returns current population of the world
+     */
     public get population() : number{
         return this._population;
     }
 
+    /**
+     * @returns content population of the world
+     */
     public get contentpopulation() : number{
         return this._contentPopulation;
     }
 
+    /**
+     * @returns happy population of the world
+     */
     public get happypopulation() : number{
         return this._happyPopulation;
     }
 
+    /**
+     * @returns amount of money the government has
+     */
     public get money() : number{
         return this._money;
     }
 
-    public set money(money : number) {
-        this._money = money;
-    }
-
+    /**
+     * @returns amount of pollution in the world
+     */
     public get pollution() : number{
         return this._pollution;
     }
 
+    /**
+     * @returns score of the world
+     */
     public get score() : number{
         return this._score;
     }
 
+    /**
+     * @returns the map of the world
+     */
     public get map() : Map{
         return this._map;
     }
 
+    /**
+     * @returns the amount of time it takes in seconds for a month to pass in the world
+     */
+    public get timePerMonth() : number{
+        return this._timePerMonth;
+    }
+
+    /**
+     * Called every month to update the world
+     */
     public updateNewMonth() : void {
         this.checkEvents();
 
         this._time ++;
 
+        this.collectPopulation();
+
+        this._money += this.collectRevenue();
+
+        this._money -= this.collectMaintenance();
+
+        this._pollution = this.collectPollution();
+
         this._score = this.calculateScores();
     }
 
+    /**
+     * Checks if any natural events will happen
+     */
     private checkEvents() : void{
         if(GlobalEventObjects.AlienInvasion.checkEvent() === true){
             this.eventCalender.push(new Pair(this._time, new GlobalEventObjects.AlienInvasion(this._time)))
@@ -74,6 +134,10 @@ class Game {
         }
     }
 
+    /**
+     * Calculates the score of the planet
+     * @returns Returns the score number
+     */
     private calculateScores() : number{
         let newScore : number = 0;
 
@@ -82,13 +146,84 @@ class Game {
         return newScore;
     }
 
+    /**
+     * Collects the current population
+     */
     private collectPopulation() : void {
-        for(let i=0; i<this._map.grid.length; i++){
-            for(let j=0; j<this._map.grid[i].length; j++){
-                let curplot : Plot = this._map.getGridCoord(j, i);
-                // check if residential facility
+
+        // set all back to 0
+        this._population = 0;
+        this._contentPopulation = 0;
+        this._happyPopulation = 0;
+
+        for(let i=0; i<this._map.mapSizeY; i++){
+            for(let j=0; j<this._map.mapSizeX; j++){
+                let plotObject : Residential = this._map.getGridCoord(j, i) as Residential;
+                // check for residential type
+                if(Map.checkPlotType(plotObject) === "Residential"){
+                    this._population += plotObject.population;
+                    this._contentPopulation += plotObject.contentPopulation;
+                    this._happyPopulation += plotObject.happyPopulation;
+                }
             }
         }
+    }
+
+    /**
+     * Collects the revenue earned for the month
+     * @returns returns the revenue generated by the facilites
+     */
+    private collectRevenue() : number {
+
+        let revenueMonth : number = 0;
+
+        for(let i=0; i<this._map.mapSizeY; i++){
+            for(let j=0; j<this._map.mapSizeX; j++){
+                let plotObject : Facility = this._map.getGridCoord(j, i) as Facility;
+                // check for facility type
+                if(Map.checkFacility(plotObject)){
+                    revenueMonth += plotObject.revenue;
+                }
+            }
+        }
+        return revenueMonth;
+    }
+
+    /**
+     * Collects the total maintenance cost for the month
+     * @returns Returns the total maintenance cost of the facilites
+     */
+    private collectMaintenance() : number {
+
+        let maintenanceMonth : number = 0;
+
+        for(let i=0; i<this._map.mapSizeY; i++){
+            for(let j=0; j<this._map.mapSizeX; j++){
+                let plotObject : Facility = this._map.getGridCoord(j, i) as Facility;
+                // check for facility type
+                if(Map.checkFacility(plotObject)){
+                    maintenanceMonth += plotObject.maintenanceCost;
+                }
+            }
+        }
+        return maintenanceMonth;
+    }
+
+    /**
+     * Collects the total pollution on the map for the month
+     * @returns returns the total pollution in the map
+     */
+    private collectPollution() : number {
+
+        let pollutionMonth : number = 0;
+
+        for(let i=0; i<this._map.mapSizeY; i++){
+            for(let j=0; j<this._map.mapSizeX; j++){
+                let pollutionAmount : number = this._map.getPollutionCoord(j, i) as number;
+                pollutionMonth += pollutionAmount;                
+            }
+        }
+        return pollutionMonth;
     }
 
 }

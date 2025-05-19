@@ -26,6 +26,10 @@ export abstract class Plot {
         this._buildingAge = age;
     }
 
+    public get name() : string{
+        return this._name;
+    }
+
     protected constructor(name : string){
         this._name = name;
         this._buildingAge = 0;
