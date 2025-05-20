@@ -1,6 +1,8 @@
 import { Commercial } from "../objects/commercial";
 import { Map } from "../objects/map";
 
+import { List } from "../datastructures/list";
+
 /**
  * Store, type of commercial facility
  */
@@ -22,6 +24,9 @@ export class Store extends Commercial{
 
         this._xPosition = x;
         this._yPosition = y;
+    }
+    public override updateMonth(): void {
+        
     }
 
     /**
@@ -47,11 +52,16 @@ export class Store extends Commercial{
     public maintenanceLost(): number {
         return this._maintenaceCost;
     }
-    static override isBuildable(x: number, y: number, map: Map): string {
-        return "true"
+    static override isBuildable(x: number, y: number, map: Map): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
     }
-    fullyFunctional(map: Map): string {
-        return "true"
+    protected override fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Residential", 6, this._map.typeBfs)){ problems.push("Residential") }
+
+        return problems;
     }
 }
 
@@ -77,6 +87,9 @@ export class Office extends Commercial{
         this._xPosition = x;
         this._yPosition = y;
     }
+    public override updateMonth(): void {
+        
+    }
 
     /**
      * Office revenue
@@ -101,11 +114,16 @@ export class Office extends Commercial{
     public maintenanceLost(): number {
         return this._maintenaceCost;
     }
-    static override isBuildable(x: number, y: number, map: Map): string {
-        return "true"
+    static override isBuildable(x: number, y: number, map: Map): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
     }
-    fullyFunctional(map: Map): string {
-        return "true"
+    protected override fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Residential", 6, this._map.typeBfs)){ problems.push("Residential") }
+
+        return problems;
     }
 }
 
@@ -133,6 +151,9 @@ export class Restaurant extends Commercial{
         this._yPosition = y;
          
     }
+    public override updateMonth(): void {
+        
+    }
 
     /**
      * Restaraunt revenue
@@ -157,10 +178,15 @@ export class Restaurant extends Commercial{
     public maintenanceLost(): number {
         return this._maintenaceCost;
     }
-    static override isBuildable(x: number, y: number, map: Map): string {
-        return "true"
+    static override isBuildable(x: number, y: number, map: Map): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
     }
-    public fullyFunctional(map: Map): string {
-        return "true"
+    protected override fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Residential", 6, this._map.typeBfs)){ problems.push("Residential") }
+
+        return problems;
     }
 }

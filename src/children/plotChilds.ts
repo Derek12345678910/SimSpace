@@ -1,6 +1,8 @@
 import { Map } from "../objects/map"
 import { Plot } from "../objects/plot";
 
+import { List } from "../datastructures/list";
+
 export class PlanetaryDefenseSystem extends Plot{
     static override buildCost: number = 1000000000000;
     static override buildingName: string = "Planetary Defense System";
@@ -12,16 +14,21 @@ export class PlanetaryDefenseSystem extends Plot{
 
     }
 
+    public override updateMonth(): void {
+        
+    }
+
     static checkCost(money : number) : boolean {
         return PlanetaryDefenseSystem.buildCost <= money;
     }
     
-    static isBuildable(x : number, y : number, map : Map) : string{
-        return "Success";
+    static override isBuildable(x: number, y: number, map: Map) : List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
     }
-
-    public override fullyFunctional(map : Map) : string{
-        return "Success"
-    }
+    public fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
+    }    
 
 }

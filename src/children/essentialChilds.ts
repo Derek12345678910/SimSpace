@@ -1,6 +1,8 @@
 import { Essential } from "../objects/essential";
 import { Map } from "../objects/map";
 
+import { List } from "../datastructures/list";
+
 /**
  * Power Plant, type of essential facility
  */
@@ -23,6 +25,18 @@ export class PowerPlant extends Essential{
         this._xPosition = x;
         this._yPosition = y;
 
+    }
+    public override updateMonth(): void {
+        
+    }
+    static override checkCost(money: number): boolean {
+        return PowerPlant.buildCost <= money;
+    }
+    public override updateMonth(): void {
+       
+    }
+    static override checkCost(money: number): boolean {
+        return PowerPlant.buildCost <= money;
     }
     /**
      * Power Plant revenue
@@ -47,11 +61,13 @@ export class PowerPlant extends Essential{
     public maintenanceLost(): number {
         return this._maintenaceCost;
     }
-    static override isBuildable(x: number, y: number, map: Map): string {
-        return "true"
+    static override isBuildable(x: number, y: number, map: Map): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
     }
-    public fullyFunctional(map: Map): string {
-        return "true"
+    protected override fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
     }    
 }
 
@@ -78,6 +94,9 @@ export class EmergencyService extends Essential{
         this._yPosition = y;
 
     }
+    public override updateMonth(): void {
+        
+    }
 
     /**
      * Emergency Service revenue
@@ -102,12 +121,13 @@ export class EmergencyService extends Essential{
     public maintenanceLost(): number {
         return this._maintenaceCost;
     }
-
-    static override isBuildable(x: number, y: number, map: Map): string {
-        return "true"
+    static override isBuildable(x: number, y: number, map: Map): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
     }
-    public fullyFunctional(map: Map): string {
-        return "true"
+    protected override fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
     }    
 }
 
@@ -134,6 +154,9 @@ export class EducationCentre extends Essential{
         this._yPosition = y;
 
     }
+    public override updateMonth(): void {
+        
+    }
 
     /**
      * Education Centre revenue
@@ -158,12 +181,14 @@ export class EducationCentre extends Essential{
     public maintenanceLost(): number {
         return this._maintenaceCost;
     }
-    static override isBuildable(x: number, y: number, map: Map): string {
-        return "true"
+    static override isBuildable(x: number, y: number, map: Map): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
     }
-    public fullyFunctional(map: Map): string {
-        return "true"
-    }    
+    protected override fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
+    }      
 }
 
 /**
@@ -189,6 +214,9 @@ export class Medical extends Essential{
         this._yPosition = y;
 
     }
+    public override updateMonth(): void {
+        
+    }
 
     /**
      * Medical Facility revenue
@@ -213,12 +241,14 @@ export class Medical extends Essential{
     public maintenanceLost(): number {
         return this._maintenaceCost;
     }
-    static override isBuildable(x: number, y: number, map: Map): string {
-        return "true"
+    static override isBuildable(x: number, y: number, map: Map): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
     }
-    public fullyFunctional(map: Map): string {
-        return "true"
-    }    
+    protected override fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
+    }     
 }
 
 /**
@@ -244,6 +274,9 @@ export class Government extends Essential{
         this._yPosition = y;
 
     }
+    public override updateMonth(): void {
+        
+    }
 
     /**
      * Government Facility revenue
@@ -268,10 +301,12 @@ export class Government extends Essential{
     public maintenanceLost(): number {
         return this._maintenaceCost;
     }
-    static override isBuildable(x: number, y: number, map: Map): string {
-        return "true"
+    static override isBuildable(x: number, y: number, map: Map): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
     }
-    public fullyFunctional(map: Map): string {
-        return "true"
-    }    
+    protected override fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
+    }      
 }

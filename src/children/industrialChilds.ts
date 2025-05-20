@@ -1,6 +1,7 @@
 import { Industrial } from "../objects/industrial";
 import { Map } from "../objects/map";
 
+import { List } from "../datastructures/list";
 
 export class Factory extends Industrial{
     
@@ -28,6 +29,9 @@ export class Factory extends Industrial{
         this._xPosition = x;
         this._yPosition = y;
 
+    }
+    public override updateMonth(): void {
+        
     }
 
     /**
@@ -59,12 +63,18 @@ export class Factory extends Industrial{
         }
         return this._buildingAge*100000;
     }
+    static override isBuildable(x: number, y: number, map: Map) : List<string> {
+        let problems : List<string> = new List<string>();
+        if(!map.searchRange(x, y, "Power Plant", 6, map.plotBfs)){ problems.push("Power Plant") }
 
-    static override isBuildable(x: number, y: number, map: Map): string {
-        return "true"
+        return problems;
     }
-    public fullyFunctional(map: Map): string {
-        return "true"
+    public fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Power Plant", 6, this._map.plotBfs)){ problems.push("Power Plant") }
+
+        return problems;
     }    
 }
 
@@ -92,6 +102,9 @@ export class EnvironmentalFacility extends Industrial{
 
         this._xPosition = x;
         this._yPosition = y;
+    }
+    public override updateMonth(): void {
+        
     }
 
     /**
@@ -125,10 +138,17 @@ export class EnvironmentalFacility extends Industrial{
     public override maintenanceLost(): number {
         return this._maintenaceCost;
     }
-    static override isBuildable(x: number, y: number, map: Map): string {
-        return "true"
+    static override isBuildable(x: number, y: number, map: Map): List<string> {
+        let problems : List<string> = new List<string>();
+        if(!map.searchRange(x, y, "Power Plant", 6, map.plotBfs)){ problems.push("Power Plant") }
+
+        return problems;
     }
-    public override fullyFunctional(map: Map): string {
-        return "true"
-    }    
+    public fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+        
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Power Plant", 6, this._map.plotBfs)){ problems.push("Power Plant") }
+
+        return problems;
+    }  
 }

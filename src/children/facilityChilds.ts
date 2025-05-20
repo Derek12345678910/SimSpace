@@ -1,6 +1,8 @@
 import { Facility } from "../objects/facility";
 import { Map } from "../objects/map";
 
+import { List } from "../datastructures/list";
+
 export class Warehouse extends Facility{
     static override buildCost: number = 10000000;
     static override buildingName: string = "Warehouse";
@@ -17,6 +19,10 @@ export class Warehouse extends Facility{
         this._xPosition = x;
         this._yPosition = y;
 
+    }
+
+    public override updateMonth(): void {
+        
     }
 
     static checkCost(money : number) : boolean {
@@ -47,12 +53,13 @@ export class Warehouse extends Facility{
         return this._maintenaceCost;
     }
     
-    static isBuildable(x : number, y : number, map : Map) : string{
-        return "Success";
-    }
-
-    public override fullyFunctional(map : Map) : string{
-        return "Success"
-    }
+    static override isBuildable(x: number, y: number, map: Map) : List<string> {
+            let problems : List<string> = new List<string>();    
+            return problems;
+        }
+    public fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
+    }    
 
 }
