@@ -1,5 +1,7 @@
 import { Map } from "./map"
 
+import { List } from "../datastructures/list";
+
 /**
  * Abstract class for a plot of land on the map
  */
@@ -68,27 +70,13 @@ export abstract class Plot {
         return true;
     }
 
-    static isBuildable(x : number, y : number, map : Map) : string{
-        return "Success";
+    static isBuildable(x : number, y : number, map : Map) : List<string>{
+        let problems : List<string> = new List<string>();
+        return problems;
     }
 
-    abstract fullyFunctional(map : Map) : string
+    public abstract updateMonth() : void
 
-    /**
-     * Check if a target is within a range
-     * @param x x coordinate 
-     * @param y y coordinate
-     * @param map map that is being searched
-     * @param targetName string name of the target
-     * @param range range to be within
-     * @returns True if the target is within a certain range
-     */
-    static searchRange(x : number, y : number, map : Map, targetName : string, range : number) : boolean {
-        // inside range
-        if(map.plotBfs(x, y, targetName) <= range){
-            return true;
-        }
-        return false;
-    }
+    protected abstract fullyFunctional() : List<string>
 
 }

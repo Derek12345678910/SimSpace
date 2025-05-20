@@ -1,6 +1,8 @@
 import { Map } from "../objects/map"
 import { Land } from "../objects/land"
 
+import { List } from "../datastructures/list";
+
 export class Grass extends Land{
     static override buildCost : number = 0;
     static override buildingName : string = "Grass";
@@ -11,21 +13,27 @@ export class Grass extends Land{
         this._yPosition = y;
     }
 
+    public override updateMonth(): void {
+        
+    }
+
     static checkCost(money : number) : boolean {
         return Grass.buildCost <= money;
     }
 
-    static isBuildable(x : number, y : number, map : Map) : string{
-        return "Success";
+    static isBuildable(x : number, y : number, map : Map) : List<string>{
+        let problems : List<string> = new List<string>();
+        return problems;
     }
 
-    public override fullyFunctional(map : Map) : string{
-        return "Success"
+    public override fullyFunctional() : List<string>{
+        let problems : List<string> = new List<string>();
+        return problems;
     }
 }
 
 export class Rock extends Land{
-    static override buildCost : number = 0;
+    static override buildCost : number = 100;
     static override buildingName : string = "Rock";
 
     public constructor(x : number, y : number, map : Map){
@@ -34,21 +42,27 @@ export class Rock extends Land{
         this._yPosition = y;
     }
 
+    public override updateMonth(): void {
+        
+    }
+
     static checkCost(money : number) : boolean {
         return Grass.buildCost <= money;
     }
 
-    static isBuildable(x : number, y : number, map : Map) : string{
-        return "Success";
+    static isBuildable(x : number, y : number, map : Map) : List<string>{
+        let problems : List<string> = new List<string>();
+        return problems;
     }
 
-    public override fullyFunctional(map : Map) : string{
-        return "Success"
+    public override fullyFunctional() : List<string>{
+        let problems : List<string> = new List<string>();
+        return problems;
     }
 }
 
 export class Tree extends Land{
-    static override buildCost : number = 0;
+    static override buildCost : number = 100;
     static override buildingName : string = "Tree";
 
     public constructor(x : number, y : number, map : Map){
@@ -57,15 +71,21 @@ export class Tree extends Land{
         this._yPosition = y;
     }
 
+    public override updateMonth(): void {
+        
+    }
+
     static checkCost(money : number) : boolean {
         return Grass.buildCost <= money;
     }
 
-    static isBuildable(x : number, y : number, map : Map) : string{
-        return "Success";
+    static isBuildable(x : number, y : number, map : Map) : List<string>{
+        let problems : List<string> = new List<string>();
+        return problems;
     }
 
-    public override fullyFunctional(map : Map) : string{
-        return "Success"
+    public override fullyFunctional() : List<string>{
+        let problems : List<string> = new List<string>();
+        return problems;
     }
 }

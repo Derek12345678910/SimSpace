@@ -2,6 +2,7 @@ import { Map } from "./map"
 import { Plot } from "./plot"
 import { GlobalEvent } from "./globalevents";
 import * as GlobalEventObjects from "../children/eventsChilds"
+import * as LandObjects from "../children/landChilds"
 
 import { Facility } from "./facility";
 import { Residential } from "./residential";
@@ -37,6 +38,11 @@ export class Game {
      */
     public constructor(xLength : number, yLength : number, timePerMonth : number){
         this._map = new Map(xLength, yLength);
+        for (let i = 0; i < yLength; i++) {
+            for (let j = 0; j < xLength; j++) {
+                this._map.setGridCoord(i, j, new LandObjects.Grass(i, j, this._map));
+            }
+        }
         this._timePerMonth = timePerMonth;
     }
 

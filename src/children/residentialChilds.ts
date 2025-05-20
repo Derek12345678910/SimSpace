@@ -1,10 +1,13 @@
 import { Residential } from "../objects/residential";
 import { Map } from "../objects/map";
 
+import { List } from "../datastructures/list";
+
 export class AffordableHome extends Residential{
     static override buildCost : number = 50000000;
     static override buildingName: string = "Affordable Home"
 
+    /** */
     constructor(x : number, y : number, map : Map){
         super(AffordableHome.buildingName, AffordableHome.buildCost, map);
 
@@ -24,8 +27,27 @@ export class AffordableHome extends Residential{
 
     }
 
-    static override isBuildable(x: number, y: number, map: Map): string {
-        return "true";
+    public override updateMonth(): void {
+        this.fullyFunctional();
+    }
+
+    static override checkCost(money: number): boolean {
+        return AffordableHome.buildCost <= money;
+    }
+
+    static override isBuildable(x: number, y: number, map: Map) : List<string> {
+        let problems : List<string> = new List<string>();
+        if(!map.searchRange(x, y, "Power Plant", 8, map.plotBfs)){ problems.push("Power Plant") }
+        if(!map.searchRange(x, y, "Emergency Service Facility", 8, map.plotBfs)){ problems.push("Emergency Service Facility") }
+        if(!map.searchRange(x, y, "Education Centre", 8, map.plotBfs)){ problems.push("Education Centre") }
+        if(!map.searchRange(x, y, "Medical Facility", 8, map.plotBfs)){ problems.push("Medical Facility") }
+        if(!map.searchRange(x, y, "Government Facility", 8, map.plotBfs)){ problems.push("Government Facility") }
+
+        if(!map.searchRange(x, y, "Store", 5, map.plotBfs)){ problems.push("Store") }
+
+        if(!map.searchRange(x, y, "Restaurant", 8, map.plotBfs)){ problems.push("Restaurant") }
+
+        return problems;
     }
 
     protected override revenueEarned(): number {
@@ -40,8 +62,19 @@ export class AffordableHome extends Residential{
         return 1;
     }
 
-    public override fullyFunctional(map: Map): string {
-        return "a"
+    protected override fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Power Plant", 8, this._map.plotBfs)){ problems.push("Power Plant") }
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Emergency Service Facility", 8, this._map.plotBfs)){ problems.push("Emergency Service Facility") }
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Education Centre", 8, this._map.plotBfs)){ problems.push("Education Centre") }
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Medical Facility", 8, this._map.plotBfs)){ problems.push("Medical Facility") }
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Government Facility", 8, this._map.plotBfs)){ problems.push("Government Facility") }
+
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Store", 5, this._map.plotBfs)){ problems.push("Store") }
+
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Restaurant", 8, this._map.plotBfs)){ problems.push("Restaurant") }
+
+        return problems;
     }
 
     protected override managePopulation(): void {
@@ -78,8 +111,27 @@ export class LuxuryHome extends Residential{
 
     }
 
-    static override isBuildable(x: number, y: number, map: Map): string {
-        return "true";
+    public override updateMonth(): void {
+        this.fullyFunctional();
+    }
+
+    static override checkCost(money: number): boolean {
+        return LuxuryHome.buildCost <= money;
+    }
+
+    static override isBuildable(x: number, y: number, map: Map) : List<string> {
+        let problems : List<string> = new List<string>();
+        if(!map.searchRange(x, y, "Power Plant", 8, map.plotBfs)){ problems.push("Power Plant") }
+        if(!map.searchRange(x, y, "Emergency Service Facility", 8, map.plotBfs)){ problems.push("Emergency Service Facility") }
+        if(!map.searchRange(x, y, "Education Centre", 8, map.plotBfs)){ problems.push("Education Centre") }
+        if(!map.searchRange(x, y, "Medical Facility", 8, map.plotBfs)){ problems.push("Medical Facility") }
+        if(!map.searchRange(x, y, "Government Facility", 8, map.plotBfs)){ problems.push("Government Facility") }
+
+        if(!map.searchRange(x, y, "Store", 5, map.plotBfs)){ problems.push("Store") }
+
+        if(!map.searchRange(x, y, "Restaurant", 8, map.plotBfs)){ problems.push("Restaurant") }
+
+        return problems;
     }
 
     protected override revenueEarned(): number {
@@ -94,13 +146,24 @@ export class LuxuryHome extends Residential{
         return 1;
     }
 
-    public override fullyFunctional(): string {
-        return "a"
+    protected override fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Power Plant", 8, this._map.plotBfs)){ problems.push("Power Plant") }
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Emergency Service Facility", 8, this._map.plotBfs)){ problems.push("Emergency Service Facility") }
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Education Centre", 8, this._map.plotBfs)){ problems.push("Education Centre") }
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Medical Facility", 8, this._map.plotBfs)){ problems.push("Medical Facility") }
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Government Facility", 8, this._map.plotBfs)){ problems.push("Government Facility") }
+
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Store", 5, this._map.plotBfs)){ problems.push("Store") }
+
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Restaurant", 8, this._map.plotBfs)){ problems.push("Restaurant") }
+
+        return problems;
     }
 
     protected override managePopulation(): void {
         let newPopulation: number;
-        if(!this.fullyFunctional()){
+        if(this.fullyFunctional().length !== 0){
             newPopulation= 5000*0.1;
         }
         else{
@@ -138,8 +201,27 @@ export class ComfortableHome extends Residential{
 
     }
 
-    static override isBuildable(x: number, y: number, map: Map): string {
-        return "true";
+    public override updateMonth(): void {
+        this.fullyFunctional();
+    }
+
+    static override checkCost(money: number): boolean {
+        return ComfortableHome.buildCost <= money;
+    }
+
+    static override isBuildable(x: number, y: number, map: Map) : List<string> {
+        let problems : List<string> = new List<string>();
+        if(!map.searchRange(x, y, "Power Plant", 8, map.plotBfs)){ problems.push("Power Plant") }
+        if(!map.searchRange(x, y, "Emergency Service Facility", 8, map.plotBfs)){ problems.push("Emergency Service Facility") }
+        if(!map.searchRange(x, y, "Education Centre", 8, map.plotBfs)){ problems.push("Education Centre") }
+        if(!map.searchRange(x, y, "Medical Facility", 8, map.plotBfs)){ problems.push("Medical Facility") }
+        if(!map.searchRange(x, y, "Government Facility", 8, map.plotBfs)){ problems.push("Government Facility") }
+
+        if(!map.searchRange(x, y, "Store", 5, map.plotBfs)){ problems.push("Store") }
+
+        if(!map.searchRange(x, y, "Restaurant", 8, map.plotBfs)){ problems.push("Restaurant") }
+
+        return problems;
     }
 
     protected override revenueEarned(): number {
@@ -154,8 +236,19 @@ export class ComfortableHome extends Residential{
         return 1;
     }
 
-    public override fullyFunctional(map: Map): string {
-        return "a"
+    protected override fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Power Plant", 8, this._map.plotBfs)){ problems.push("Power Plant") }
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Emergency Service Facility", 8, this._map.plotBfs)){ problems.push("Emergency Service Facility") }
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Education Centre", 8, this._map.plotBfs)){ problems.push("Education Centre") }
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Medical Facility", 8, this._map.plotBfs)){ problems.push("Medical Facility") }
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Government Facility", 8, this._map.plotBfs)){ problems.push("Government Facility") }
+
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Store", 5, this._map.plotBfs)){ problems.push("Store") }
+
+        if(!this._map.searchRange(this._xPosition, this._yPosition, "Restaurant", 8, this._map.plotBfs)){ problems.push("Restaurant") }
+
+        return problems;
     }
 
     protected override managePopulation(): void {
