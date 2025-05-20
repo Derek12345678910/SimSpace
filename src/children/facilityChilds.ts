@@ -23,16 +23,28 @@ export class Warehouse extends Facility{
         return Warehouse.buildCost <= money;
     }
 
+    /**
+     * Warehouse revenue
+     * @returns Revenue earned in one month
+     */
     protected override revenueEarned(): number {
         return this._revenue;
     }
 
+    /**
+     * Warehouse pollution
+     * @returns Pollution generated in one month
+     */
     protected override pollutionGenerated(): number {
         return 1;
     }
 
+    /**
+     * Warehouse maintenance cost
+     * @returns Maintenance cost lost in one month
+     */
     protected override maintenanceLost(): number {
-        return 1;
+        return this._maintenaceCost;
     }
     
     static isBuildable(x : number, y : number, map : Map) : string{

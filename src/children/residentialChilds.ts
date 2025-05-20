@@ -28,22 +28,37 @@ export class AffordableHome extends Residential{
         return "true";
     }
 
+    /**
+     * Affordable home revenue earned
+     * @returns Revenue earned in one month
+     */
     protected override revenueEarned(): number {
-        return this._revenue;
+        return this._revenuePerThousand*Math.floor(this._population/1000);
     }
 
+    /**
+     * Affordable home pollution generated
+     * @returns Pollution generated in one month
+     */
     protected override pollutionGenerated(): number {
-        return 1;
+        return this._pollutionPerThousand*(Math.floor(this._population/1000));
     }
-
+    /**
+     * Affordable home maintenance cost lost
+     * @returns Maintenance cost in one month
+     */
     protected override maintenanceLost(): number {
-        return 1;
+        return this._maintenaceCost + (this._maintenanceCostPerThousand*Math.floor(this._population/1000));
     }
 
     public override fullyFunctional(map: Map): string {
         return "a"
     }
 
+    /**
+     * Increases population of an affordable home by 10% per month
+     * Max population of 25000
+     */
     protected override managePopulation(): void {
         let newPopulation: number = this._maxPopulation*0.1
         if(this._happyPopulation + this._contentPopulation + newPopulation > this._maxPopulation){
@@ -82,22 +97,38 @@ export class LuxuryHome extends Residential{
         return "true";
     }
 
+    /**
+     * Luxury home revenue
+     * @returns Revenue earned in one month
+     */
     protected override revenueEarned(): number {
-        return this._revenue;
+        return this._revenuePerThousand*(Math.floor(this._population/1000));
     }
 
+    /**
+     * Luxury home pollution generated
+     * @returns Pollution generated in one month
+     */
     protected override pollutionGenerated(): number {
-        return 1;
+        return this._pollutionPerThousand*(Math.floor(this._population/1000));
     }
 
+    /**
+     * Luxury home maintenance cost lost
+     * @returns Maintenance cost in one month
+     */
     protected override maintenanceLost(): number {
-        return 1;
+        return this._maintenaceCost + (this._maintenanceCostPerThousand*Math.floor(this._population/1000));
     }
 
     public override fullyFunctional(): string {
         return "a"
     }
 
+    /**
+     * Increases population of a luxury home by 10% per month
+     * Max population of 10000 if fully funtional, otherwise 5000
+     */
     protected override managePopulation(): void {
         let newPopulation: number;
         if(!this.fullyFunctional()){
@@ -142,22 +173,38 @@ export class ComfortableHome extends Residential{
         return "true";
     }
 
+    /**
+     * Comfortable home revenue
+     * @returns Revenue earned in one month
+     */
     protected override revenueEarned(): number {
-        return this._revenue;
+        return this._revenuePerThousand*(Math.floor(this._population/1000));
     }
 
+    /**
+     * Comfortable home pollution generated
+     * @returns Pollution generated in one month
+     */
     protected override pollutionGenerated(): number {
-        return 1;
+        return this._pollutionPerThousand*(Math.floor(this._population/1000));
     }
 
+    /**
+     * Comfortable home maintenance cost lost
+     * @returns Maintenance cost in one month
+     */
     protected override maintenanceLost(): number {
-        return 1;
+        return this._maintenaceCost + (this._maintenanceCostPerThousand*Math.floor(this._population/1000));
     }
 
     public override fullyFunctional(map: Map): string {
         return "a"
     }
 
+    /**
+     * Increases population of a comfortable home by 10% per month
+     * Max population of 15000
+     */
     protected override managePopulation(): void {
         let newPopulation: number = this._maxPopulation*0.1;
         if(this._happyPopulation + this._contentPopulation + newPopulation > this._maxPopulation){

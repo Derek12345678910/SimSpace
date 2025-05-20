@@ -24,20 +24,42 @@ export class Factory extends Industrial{
         this.finalMaintenance = 500000;
         this.months = 5;
         this.finalRevenue = 5000000;
-
+        
         this._xPosition = x;
         this._yPosition = y;
 
     }
+
+    /**
+     * Factory revenue
+     * @returns Revenue earned in one month
+     */
     public revenueEarned(): number {
-        return 1
+        if(this._buildingAge>=5){
+            return this.finalRevenue;
+        }
+        return this._buildingAge*1000000;
     }
+
+    /**
+     * Factory pollution
+     * @returns Pollution generated in one month
+     */    
     public pollutionGenerated(): number {
         return this._pollution;
     }
+
+    /**
+     * Factory maintenance cost lost
+     * @returns Maintenance cost in one month
+     */
     public maintenanceLost(): number {
-        return this._maintenaceCost;
+        if(this._buildingAge>=this.months){
+            return this.finalMaintenance;
+        }
+        return this._buildingAge*100000;
     }
+
     static override isBuildable(x: number, y: number, map: Map): string {
         return "true"
     }
@@ -71,15 +93,35 @@ export class EnvironmentalFacility extends Industrial{
         this._xPosition = x;
         this._yPosition = y;
     }
+
+    /**
+     * Environmental facility pollution reduced
+     * @returns Pollution reduced in one month
+     */
     public pollutionReduced(): number{
         return this._reversePollution;
     }
+
+    /**
+     * Environmental facility pollution generated
+     * @returns Pollution generated in one month
+     */
     public override pollutionGenerated(): number {
         return this._pollution;
     }
+    
+    /**
+     * Environmental facility revenue 
+     * @returns Revenue earned in one month
+     */
     public override revenueEarned(): number {
         return this._revenue;
     }
+
+    /**
+     * Environmental facility maintenance cost 
+     * @returns Maintenance cost lost in one month
+     */
     public override maintenanceLost(): number {
         return this._maintenaceCost;
     }
