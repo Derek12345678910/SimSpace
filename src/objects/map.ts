@@ -11,6 +11,9 @@ import { Queue } from "../datastructures/queue";
 import { Pair } from "../datastructures/pair";
 import { Matrix } from "../datastructures/matrix"
 
+/**
+ * World map
+ */
 export class Map {
 
     private _mapSizeX : number;
@@ -21,49 +24,98 @@ export class Map {
 
     private _defenseSystem : PlanetaryDefenseSystem | null;
 
+    /**
+     * Create world map
+     * @param planetSizeX x size of the map
+     * @param planetSizeY y size of the map
+     */
     public constructor(planetSizeX : number, planetSizeY : number){
         this._grid = new Matrix<Plot>(planetSizeX, planetSizeY, null);
         this._pollutionGrid = new Matrix<number>(planetSizeX, planetSizeY, 0);        
     }
 
+    /**
+     * @returns grid of the map
+     */
     public get grid() : Matrix<Plot>{
         return this._grid;
     }
 
+    /**
+     * @returns grid of the pollution map
+     */
     public get pollutionGrid() : Matrix<number>{
         return this._pollutionGrid;
     }
 
+    /**
+     * Get the plot of the coordinate
+     * @param x x coordinate
+     * @param y y coordinate
+     * @returns the plot at the coordinate
+     */
     public getGridCoord(x : number, y : number) : Plot | null{
         return this._grid.getCoord(x, y);
     }
 
+    /**
+     * Gets the pollution at a coordinate
+     * @param x x coordinate 
+     * @param y y coordinate
+     * @returns thes pollution at the coordinate
+     */
     public getPollutionCoord(x : number, y : number) : number | null {
         return this._pollutionGrid.getCoord(x, y);
     }
 
+    /**
+     * Sets the plot at a plot
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param Plot the plot to set
+     * @returns true if the plot is placed
+     */
     public setGridCoord(x : number, y : number, Plot : Plot) : boolean{
         this._grid.setCoord(x, y, Plot);
         return true;
     }
 
+    /**
+     * Set the pollution at a coordinate
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param pollution pollution at the coordinate
+     * @returns true if the pollution is set
+     */
     public setPollutionGridCoord(x : number, y : number, pollution : number) : boolean{
         this._pollutionGrid.setCoord(x, y, pollution);
         return true;
     } 
 
+    /**
+     * @returns the x map size
+     */
     public get mapSizeX() : number {
         return this._mapSizeX;
     }
 
+    /**
+     * @returns the y map size
+     */
     public get mapSizeY() : number {
         return this._mapSizeY;
     }
 
+    /**
+     * @returns the defense system
+     */
     public get defenseSystem() : PlanetaryDefenseSystem | null{
         return this._defenseSystem;
     }   
 
+    /**
+     * @param defenseSystem the defense system
+     */
     public set defenseSystem(defenseSystem : PlanetaryDefenseSystem) {
         this._defenseSystem = defenseSystem;
     }   

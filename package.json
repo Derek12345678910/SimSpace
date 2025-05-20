@@ -11,5 +11,9 @@
   "devDependencies": {
     "@types/node": "^18.19.100",
     "typescript": "^5.8.3"
-  }
+  },
+  "dependencies": {
+    "live-server": "^1.2.2"
+  },
+  "type": "module"
 }
