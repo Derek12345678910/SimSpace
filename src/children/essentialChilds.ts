@@ -11,7 +11,7 @@ export class PowerPlant extends Essential{
     static override buildCost: number = 500000000;
     
     /**
-     * Constructs a power plant building
+     * Constructs a power plant building   
      * @param x X coordinate of the power plant
      * @param y Y coordinate of the power plant
      */
@@ -32,12 +32,32 @@ export class PowerPlant extends Essential{
     static override checkCost(money: number): boolean {
         return PowerPlant.buildCost <= money;
     }
+    public override updateMonth(): void {
+       
+    }
+    static override checkCost(money: number): boolean {
+        return PowerPlant.buildCost <= money;
+    }
+    /**
+     * Power Plant revenue
+     * @returns Revenue earned in one month
+     */
     public override revenueEarned(): number {
         return super.revenueEarned();
     }
+    
+    /**
+     * Power Plant pollution
+     * @returns Pollution generated in one month
+     */
     public override pollutionGenerated(): number {
         return super.pollutionGenerated();
     }
+
+    /**
+     * Power Plant maintenance cost 
+     * @returns Maintenance cost lost in one month
+     */
     public maintenanceLost(): number {
         return this._maintenaceCost;
     }
@@ -77,12 +97,27 @@ export class EmergencyService extends Essential{
     public override updateMonth(): void {
         
     }
+
+    /**
+     * Emergency Service revenue
+     * @returns Revenue earned in one month
+     */
     public override revenueEarned(): number {
         return super.revenueEarned();
     }
+
+    /**
+     * Emergency Service pollution
+     * @returns Pollution generated in one month
+     */
     public override pollutionGenerated(): number {
         return super.pollutionGenerated();
     }
+
+    /**
+     * Power Plant maintenance cost
+     * @returns Maintenance cost lost in one month
+     */
     public maintenanceLost(): number {
         return this._maintenaceCost;
     }
@@ -122,12 +157,27 @@ export class EducationCentre extends Essential{
     public override updateMonth(): void {
         
     }
+
+    /**
+     * Education Centre revenue
+     * @returns Revenue earned in one month
+     */
     public override revenueEarned(): number {
         return super.revenueEarned();
     }
+
+    /**
+     * Education Cenre pollution
+     * @returns Pollution generated in one month
+     */
     public override pollutionGenerated(): number {
         return super.pollutionGenerated();
     }
+
+    /**
+     * Education Centre maintenance
+     * @returns Maintenance cost lost in one month
+     */
     public maintenanceLost(): number {
         return this._maintenaceCost;
     }
@@ -167,12 +217,27 @@ export class Medical extends Essential{
     public override updateMonth(): void {
         
     }
+
+    /**
+     * Medical Facility revenue
+     * @returns Revenue earned in one month
+     */
     public override revenueEarned(): number {
         return super.revenueEarned();
     }
+
+    /**
+     * Medical Facility pollution
+     * @returns Pollution generated in one month
+     */
     public override pollutionGenerated(): number {
         return super.pollutionGenerated();
     }
+
+    /**
+     * Medical Facility maintenance cost
+     * @returns Maintenance cost lost in one month
+     */
     public maintenanceLost(): number {
         return this._maintenaceCost;
     }
@@ -212,12 +277,27 @@ export class Government extends Essential{
     public override updateMonth(): void {
         
     }
+
+    /**
+     * Government Facility revenue
+     * @returns Revenue earned in one month
+     */
     public override revenueEarned(): number {
         return super.revenueEarned();
     }
+
+    /**
+     * Government Facility pollution
+     * @returns Pollution generated in one month
+     */
     public override pollutionGenerated(): number {
         return super.pollutionGenerated();
     }
+
+    /**
+     * Government Facility maintenance cost
+     * @returns Maintenance cost lost in one month
+     */
     public maintenanceLost(): number {
         return this._maintenaceCost;
     }
