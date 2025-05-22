@@ -27,13 +27,7 @@ export class PowerPlant extends Essential{
 
     }
     public override updateMonth(): void {
-        
-    }
-    static override checkCost(money: number): boolean {
-        return PowerPlant.buildCost <= money;
-    }
-    public override updateMonth(): void {
-       
+        this._buildingAge+=1;
     }
     static override checkCost(money: number): boolean {
         return PowerPlant.buildCost <= money;
@@ -95,7 +89,7 @@ export class EmergencyService extends Essential{
 
     }
     public override updateMonth(): void {
-        
+        this._buildingAge+=1;
     }
 
     /**
@@ -155,7 +149,7 @@ export class EducationCentre extends Essential{
 
     }
     public override updateMonth(): void {
-        
+        this._buildingAge+=1;
     }
 
     /**
@@ -215,7 +209,7 @@ export class Medical extends Essential{
 
     }
     public override updateMonth(): void {
-        
+        this._buildingAge+=1;
     }
 
     /**
@@ -275,7 +269,7 @@ export class Government extends Essential{
 
     }
     public override updateMonth(): void {
-        
+        this._buildingAge+=1;
     }
 
     /**

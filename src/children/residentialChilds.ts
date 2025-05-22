@@ -29,6 +29,7 @@ export class AffordableHome extends Residential{
 
     public override updateMonth(): void {
         this.fullyFunctional();
+        this._buildingAge+=1;
     }
 
     static override checkCost(money: number): boolean {
@@ -72,6 +73,8 @@ export class AffordableHome extends Residential{
     protected override maintenanceLost(): number {
         return this._maintenaceCost + (this._maintenanceCostPerThousand*Math.floor(this._population/1000));
     }
+
+    
 
     protected override fullyFunctional(): List<string> {
         let problems : List<string> = new List<string>();
@@ -128,6 +131,7 @@ export class LuxuryHome extends Residential{
 
     public override updateMonth(): void {
         this.fullyFunctional();
+        this._buildingAge+=1;
     }
 
     static override checkCost(money: number): boolean {
@@ -234,6 +238,7 @@ export class ComfortableHome extends Residential{
 
     public override updateMonth(): void {
         this.fullyFunctional();
+        this._buildingAge+=1;
     }
 
     static override checkCost(money: number): boolean {

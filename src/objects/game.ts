@@ -27,6 +27,7 @@ export class Game {
     private _score : number = 0;
     private _timePerMonth : number;
     private _map : Map;
+    private _power: number = 0;
 
     private eventCalender : List<Pair> = new List<Pair>();
 
@@ -89,6 +90,13 @@ export class Game {
     }
 
     /**
+     * @returns total power in the world
+     */
+    public get power(): number{
+        return this._power;
+    }
+
+    /**
      * @returns score of the world
      */
     public get score() : number{
@@ -126,6 +134,8 @@ export class Game {
         this._pollution = this.collectPollution();
 
         this._score = this.calculateScores();
+
+        this._power -= this.collectPower();
     }
 
     /**
@@ -167,7 +177,7 @@ export class Game {
                 let plotObject : Residential = this._map.getGridCoord(j, i) as Residential;
                 // check for residential type
                 if(Map.checkPlotType(plotObject) === "Residential"){
-                    this._population += plotObject.population;
+                    this._population += plotObject.contentPopulation + plotObject.happyPopulation;
                     this._contentPopulation += plotObject.contentPopulation;
                     this._happyPopulation += plotObject.happyPopulation;
                 }
@@ -230,6 +240,18 @@ export class Game {
             }
         }
         return pollutionMonth;
+    }
+
+    private collectPower(): number{
+        let powerMonth : number = 0;
+
+        for(let i=0; i<this._map.mapSizeY; i++){
+            for(let j=0; j<this._map.mapSizeX; j++){
+                let powerAmount : number = this._map.getPollutionCoord(j, i) as number;
+                powerMonth += powerAmount;                
+            }
+        }
+        return powerMonth;  
     }
 
 }
