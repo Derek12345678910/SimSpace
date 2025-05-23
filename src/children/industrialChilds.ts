@@ -1,5 +1,8 @@
 import { Industrial } from "../objects/industrial.js";
 import { Map } from "../objects/map.js";
+import { Pair } from "../datastructures/pair.js";
+import { Matrix } from "../datastructures/matrix.js";
+import { Queue } from "../datastructures/queue.js";
 
 import { List } from "../datastructures/list.js";
 
@@ -31,7 +34,7 @@ export class Factory extends Industrial{
 
     }
     public override updateMonth(): void {
-        
+        this._buildingAge+=1;
     }
 
     /**
@@ -39,10 +42,15 @@ export class Factory extends Industrial{
      * @returns Revenue earned in one month
      */
     public revenueEarned(): number {
-        if(this._buildingAge>=5){
-            return this.finalRevenue;
+        let distance: number = this._map.plotBfs(this._xPosition, this._yPosition, "Warehouse");
+        let multiplier: number = 1;
+        if(distance!==-1&&distance<6){
+            multiplier = 2;
         }
-        return this._buildingAge*1000000;
+        if(this._buildingAge>=5){
+            return this.finalRevenue*multiplier;
+        }
+        return this._buildingAge*1000000*multiplier;
     }
 
     /**
@@ -76,6 +84,9 @@ export class Factory extends Industrial{
 
         return problems;
     }    
+    public static checkCost(money : number) : boolean {
+        return Factory.buildCost <= money;
+    }
 }
 
 export class EnvironmentalFacility extends Industrial{
@@ -104,7 +115,7 @@ export class EnvironmentalFacility extends Industrial{
         this._yPosition = y;
     }
     public override updateMonth(): void {
-        
+        this._buildingAge+=1;
     }
 
     /**
@@ -112,6 +123,7 @@ export class EnvironmentalFacility extends Industrial{
      * @returns Pollution reduced in one month
      */
     public pollutionReduced(): number{
+        // retrun the polluton grid
         return this._reversePollution;
     }
 
@@ -151,4 +163,74 @@ export class EnvironmentalFacility extends Industrial{
 
         return problems;
     }  
+
+    public static checkCost(money : number) : boolean {
+        return EnvironmentalFacility.buildCost <= money;
+    }
+}
+
+
+export class Warehouse extends Industrial{
+    static override buildCost: number = 10000000;
+    static override buildingName: string = "Warehouse";
+
+    public constructor(x : number, y : number, map : Map){
+        super(Warehouse.buildingName, Warehouse.buildCost, map);
+
+        this._revenue = 0;
+        this._maintenaceCost = 500000;
+        this._powerCost = 10;
+        this._pollution = 0;
+        this._reversePollution = 0;
+
+        this.finalMaintenance = 500000;
+        this.months = 0;
+        this.finalRevenue = 0;
+
+        this._xPosition = x;
+        this._yPosition = y;
+
+    }
+
+    public override updateMonth(): void {
+        this._buildingAge += 1;
+    }
+
+    public static checkCost(money : number) : boolean {
+        return Warehouse.buildCost <= money;
+    }
+
+    /**
+     * Warehouse revenue
+     * @returns Revenue earned in one month
+     */
+    public override revenueEarned(): number {
+        return this._revenue;
+    }
+
+    /**
+     * Warehouse pollution
+     * @returns Pollution generated in one month
+     */
+    public override pollutionGenerated(): number {
+        return this._maintenaceCost;
+    }
+
+    /**
+     * Warehouse maintenance cost
+     * @returns Maintenance cost lost in one month
+     */
+    public override maintenanceLost(): number {
+        return this._maintenaceCost;
+    }
+    
+    static override isBuildable(x: number, y: number, map: Map) : List<string> {
+            let problems : List<string> = new List<string>();    
+            return problems;
+        }
+    public fullyFunctional(): List<string> {
+        let problems : List<string> = new List<string>();
+        return problems;
+    }    
+
 }

@@ -27,6 +27,7 @@ export class Game {
     private _score : number = 0;
     private _timePerMonth : number;
     private _map : Map;
+    private _power: number = 0;
 
     private eventCalender : List<Pair> = new List<Pair>();
 
@@ -89,12 +90,18 @@ export class Game {
     }
 
     /**
+     * @returns total power in the world
+     */
+    public get power(): number{
+        return this._power;
+    }
+
+    /**
      * @returns score of the world
      */
     public get score() : number{
         return this._score;
     }
-
     /**
      * @returns the map of the world
      */
@@ -117,15 +124,18 @@ export class Game {
 
         this._time ++;
 
+        for(let i=0; i<this._map.mapSizeY; i++){
+            for(let j=0; j<this._map.mapSizeX; j++){
+                let plotObject : Plot = this._map.getGridCoord(j, i) as Plot;
+                plotObject.updateMonth();
+            }
+        }
         this.collectPopulation();
-
         this._money += this.collectRevenue();
-
         this._money -= this.collectMaintenance();
-
         this._pollution = this.collectPollution();
-
         this._score = this.calculateScores();
+        this._power -= this.collectPower();
     }
 
     /**
@@ -167,9 +177,12 @@ export class Game {
                 let plotObject : Residential = this._map.getGridCoord(j, i) as Residential;
                 // check for residential type
                 if(Map.checkPlotType(plotObject) === "Residential"){
-                    this._population += plotObject.population;
-                    this._contentPopulation += plotObject.contentPopulation;
-                    this._happyPopulation += plotObject.happyPopulation;
+                    // get the population increases for total, happy, and content
+                    let populations: number[] = plotObject.managePopulation();
+                    // add it to the world population
+                    this._population += populations[0];
+                    this._happyPopulation += populations[1];
+                    this._contentPopulation += populations[2];
                 }
             }
         }
@@ -188,7 +201,8 @@ export class Game {
                 let plotObject : Facility = this._map.getGridCoord(j, i) as Facility;
                 // check for facility type
                 if(Map.checkFacility(plotObject)){
-                    revenueMonth += plotObject.revenue;
+                    // add the revenue earned by that facility
+                    revenueMonth += plotObject.revenueEarned();
                 }
             }
         }
@@ -208,7 +222,8 @@ export class Game {
                 let plotObject : Facility = this._map.getGridCoord(j, i) as Facility;
                 // check for facility type
                 if(Map.checkFacility(plotObject)){
-                    maintenanceMonth += plotObject.maintenanceCost;
+                    // add the maintenance cost of the facility
+                    maintenanceMonth += plotObject.maintenanceLost();
                 }
             }
         }
@@ -230,6 +245,24 @@ export class Game {
             }
         }
         return pollutionMonth;
+    }
+
+    /**
+     * @returns Total power used by all facilities in the game in one month
+     */
+    private collectPower(): number{
+        let powerMonth : number = 0;
+
+        for(let i=0; i<this._map.mapSizeY; i++){
+            for(let j=0; j<this._map.mapSizeX; j++){
+                let plotObject : Facility = this._map.getGridCoord(j, i) as Facility;
+                // check for facility type
+                if(Map.checkFacility(plotObject)){
+                    powerMonth += plotObject.powerCost;
+                }             
+            }
+        }
+        return powerMonth;  
     }
 
 }

@@ -31,6 +31,5 @@ export abstract class Residential extends Facility{
         return this._contentPopulation;
     }
 
-    protected abstract managePopulation() : void;
-
+    public abstract managePopulation() : number[];
 }

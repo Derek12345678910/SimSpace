@@ -14,7 +14,7 @@ export class Grass extends Land{
     }
 
     public override updateMonth(): void {
-        
+        this._buildingAge+=1;
     }
 
     static checkCost(money : number) : boolean {
@@ -43,7 +43,7 @@ export class Rock extends Land{
     }
 
     public override updateMonth(): void {
-        
+        this._buildingAge+=1
     }
 
     static checkCost(money : number) : boolean {

@@ -23,8 +23,6 @@ let world : Map = new Map(50, 50);
  * @param map map of to be displayed
  */
 function displayMap(map : Map) : void {
-    let rows : number = map.mapSizeX;
-    let cols : number = map.mapSizeY;
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;

@@ -16,6 +16,9 @@ export abstract class Facility extends Plot{
     get maintenanceCost(): number{
         return this._maintenaceCost;
     }
+    /**
+     * Facilties power cost
+     */
     get powerCost(): number{
         return this._powerCost;
     }
@@ -29,8 +32,8 @@ export abstract class Facility extends Plot{
         return this._reversePollution;
     }
 
-    protected abstract revenueEarned(): number
-    protected abstract pollutionGenerated(): number
-    protected abstract maintenanceLost(): number
+    public abstract revenueEarned(): number
+    public abstract pollutionGenerated(): number
+    public abstract maintenanceLost(): number
 
 }

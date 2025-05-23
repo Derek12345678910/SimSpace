@@ -2,7 +2,6 @@ import { Game } from "./objects/game.js";
 
 import * as commercial from "./children/commercialChilds.js";
 import * as essential from "./children/essentialChilds.js";
-import * as facilities from "./children/facilityChilds.js";
 import * as industrial from "./children/industrialChilds.js";
 import * as land from "./children/landChilds.js";
 import * as plot from "./children/plotChilds.js";

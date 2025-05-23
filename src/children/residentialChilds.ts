@@ -29,6 +29,7 @@ export class AffordableHome extends Residential{
 
     public override updateMonth(): void {
         this.fullyFunctional();
+        this._buildingAge+=1;
     }
 
     static override checkCost(money: number): boolean {
@@ -54,7 +55,7 @@ export class AffordableHome extends Residential{
      * Affordable home revenue earned
      * @returns Revenue earned in one month
      */
-    protected override revenueEarned(): number {
+    public override revenueEarned(): number {
         return this._revenuePerThousand*Math.floor(this._population/1000);
     }
 
@@ -62,16 +63,18 @@ export class AffordableHome extends Residential{
      * Affordable home pollution generated
      * @returns Pollution generated in one month
      */
-    protected override pollutionGenerated(): number {
+    public override pollutionGenerated(): number {
         return this._pollutionPerThousand*(Math.floor(this._population/1000));
     }
     /**
      * Affordable home maintenance cost lost
      * @returns Maintenance cost in one month
      */
-    protected override maintenanceLost(): number {
+    public override maintenanceLost(): number {
         return this._maintenaceCost + (this._maintenanceCostPerThousand*Math.floor(this._population/1000));
     }
+
+    
 
     protected override fullyFunctional(): List<string> {
         let problems : List<string> = new List<string>();
@@ -92,13 +95,15 @@ export class AffordableHome extends Residential{
      * Increases population of an affordable home by 10% per month
      * Max population of 25000
      */
-    protected override managePopulation(): void {
+    public override managePopulation(): number[] {
         let newPopulation: number = this._maxPopulation*0.1
         if(this._happyPopulation + this._contentPopulation + newPopulation > this._maxPopulation){
             newPopulation = this._maxPopulation - this._happyPopulation - this._contentPopulation;
         }
         this._happyPopulation += newPopulation*0.1
         this._contentPopulation += newPopulation*0.9
+        this._population = this._happyPopulation + this._contentPopulation;
+        return [this._population, this._happyPopulation, this._contentPopulation];
     }
 
 }
@@ -128,6 +133,7 @@ export class LuxuryHome extends Residential{
 
     public override updateMonth(): void {
         this.fullyFunctional();
+        this._buildingAge+=1;
     }
 
     static override checkCost(money: number): boolean {
@@ -153,7 +159,7 @@ export class LuxuryHome extends Residential{
      * Luxury home revenue
      * @returns Revenue earned in one month
      */
-    protected override revenueEarned(): number {
+    public override revenueEarned(): number {
         return this._revenuePerThousand*(Math.floor(this._population/1000));
     }
 
@@ -161,7 +167,7 @@ export class LuxuryHome extends Residential{
      * Luxury home pollution generated
      * @returns Pollution generated in one month
      */
-    protected override pollutionGenerated(): number {
+    public override pollutionGenerated(): number {
         return this._pollutionPerThousand*(Math.floor(this._population/1000));
     }
 
@@ -169,7 +175,7 @@ export class LuxuryHome extends Residential{
      * Luxury home maintenance cost lost
      * @returns Maintenance cost in one month
      */
-    protected override maintenanceLost(): number {
+    public override maintenanceLost(): number {
         return this._maintenaceCost + (this._maintenanceCostPerThousand*Math.floor(this._population/1000));
     }
 
@@ -192,7 +198,7 @@ export class LuxuryHome extends Residential{
      * Increases population of a luxury home by 10% per month
      * Max population of 10000 if fully funtional, otherwise 5000
      */
-    protected override managePopulation(): void {
+    public override managePopulation(): number[] {
         let newPopulation: number;
         if(this.fullyFunctional().length !== 0){
             newPopulation= 5000*0.1;
@@ -205,6 +211,8 @@ export class LuxuryHome extends Residential{
         }
         this._happyPopulation += newPopulation/2;
         this._contentPopulation += newPopulation/2;
+        this._population = this._contentPopulation + this._happyPopulation;
+        return [this._population,this._happyPopulation,this._contentPopulation];
     }
 
 }
@@ -234,6 +242,7 @@ export class ComfortableHome extends Residential{
 
     public override updateMonth(): void {
         this.fullyFunctional();
+        this._buildingAge+=1;
     }
 
     static override checkCost(money: number): boolean {
@@ -259,7 +268,7 @@ export class ComfortableHome extends Residential{
      * Comfortable home revenue
      * @returns Revenue earned in one month
      */
-    protected override revenueEarned(): number {
+    public override revenueEarned(): number {
         return this._revenuePerThousand*(Math.floor(this._population/1000));
     }
 
@@ -267,7 +276,7 @@ export class ComfortableHome extends Residential{
      * Comfortable home pollution generated
      * @returns Pollution generated in one month
      */
-    protected override pollutionGenerated(): number {
+    public override pollutionGenerated(): number {
         return this._pollutionPerThousand*(Math.floor(this._population/1000));
     }
 
@@ -275,7 +284,7 @@ export class ComfortableHome extends Residential{
      * Comfortable home maintenance cost lost
      * @returns Maintenance cost in one month
      */
-    protected override maintenanceLost(): number {
+    public override maintenanceLost(): number {
         return this._maintenaceCost + (this._maintenanceCostPerThousand*Math.floor(this._population/1000));
     }
 
@@ -298,13 +307,15 @@ export class ComfortableHome extends Residential{
      * Increases population of a comfortable home by 10% per month
      * Max population of 15000
      */
-    protected override managePopulation(): void {
+    public override managePopulation(): number[] {
         let newPopulation: number = this._maxPopulation*0.1;
         if(this._happyPopulation + this._contentPopulation + newPopulation > this._maxPopulation){
             newPopulation = this._maxPopulation - this._happyPopulation - this._contentPopulation;
         }   
         this._happyPopulation += newPopulation*0.25
         this._contentPopulation += newPopulation*0.75
+        this._population = this._happyPopulation + this._contentPopulation;
+        return [this._population, this._happyPopulation, this.contentPopulation];
     }
 
 }
