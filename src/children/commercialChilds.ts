@@ -72,6 +72,9 @@ export class Store extends Commercial{
 
         return problems;
     }
+    public static checkCost(money : number) : boolean {
+        return Store.buildCost <= money;
+    }
 }
 
 /**
@@ -141,6 +144,9 @@ export class Office extends Commercial{
         if(!this._map.searchRange(this._xPosition, this._yPosition, "Residential", 6, this._map.typeBfs)){ problems.push("Residential") }
 
         return problems;
+    }
+    public static checkCost(money : number) : boolean {
+        return Office.buildCost <= money;
     }
 }
 
@@ -214,4 +220,9 @@ export class Restaurant extends Commercial{
 
         return problems;
     }
+
+    public static checkCost(money : number) : boolean {
+        return Restaurant.buildCost <= money;
+    }
+
 }

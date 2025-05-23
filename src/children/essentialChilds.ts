@@ -123,6 +123,10 @@ export class EmergencyService extends Essential{
         let problems : List<string> = new List<string>();
         return problems;
     }    
+
+    public static checkCost(money : number) : boolean {
+        return EmergencyService.buildCost <= money;
+    }
 }
 
 /**
@@ -183,6 +187,10 @@ export class EducationCentre extends Essential{
         let problems : List<string> = new List<string>();
         return problems;
     }      
+
+    public static checkCost(money : number) : boolean {
+        return EducationCentre.buildCost <= money;
+    }
 }
 
 /**
@@ -243,6 +251,10 @@ export class Medical extends Essential{
         let problems : List<string> = new List<string>();
         return problems;
     }     
+
+    public static checkCost(money : number) : boolean {
+        return Medical.buildCost <= money;
+    }
 }
 
 /**
@@ -303,4 +315,8 @@ export class Government extends Essential{
         let problems : List<string> = new List<string>();
         return problems;
     }      
+
+    public static checkCost(money : number) : boolean {
+        return Government.buildCost <= money;
+    }
 }

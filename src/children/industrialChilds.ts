@@ -1,5 +1,8 @@
 import { Industrial } from "../objects/industrial";
 import { Map } from "../objects/map";
+import { Pair } from "../datastructures/pair";
+import { Matrix } from "../datastructures/matrix";
+import { Queue } from "../datastructures/queue";
 
 import { List } from "../datastructures/list";
 
@@ -81,6 +84,9 @@ export class Factory extends Industrial{
 
         return problems;
     }    
+    public static checkCost(money : number) : boolean {
+        return Factory.buildCost <= money;
+    }
 }
 
 export class EnvironmentalFacility extends Industrial{
@@ -117,6 +123,7 @@ export class EnvironmentalFacility extends Industrial{
      * @returns Pollution reduced in one month
      */
     public pollutionReduced(): number{
+        // retrun the polluton grid
         return this._reversePollution;
     }
 
@@ -156,6 +163,10 @@ export class EnvironmentalFacility extends Industrial{
 
         return problems;
     }  
+
+    public static checkCost(money : number) : boolean {
+        return EnvironmentalFacility.buildCost <= money;
+    }
 }
 
 
@@ -185,7 +196,7 @@ export class Warehouse extends Industrial{
         this._buildingAge += 1;
     }
 
-    static checkCost(money : number) : boolean {
+    public static checkCost(money : number) : boolean {
         return Warehouse.buildCost <= money;
     }
 
@@ -193,7 +204,7 @@ export class Warehouse extends Industrial{
      * Warehouse revenue
      * @returns Revenue earned in one month
      */
-    protected override revenueEarned(): number {
+    public override revenueEarned(): number {
         return this._revenue;
     }
 
@@ -201,7 +212,7 @@ export class Warehouse extends Industrial{
      * Warehouse pollution
      * @returns Pollution generated in one month
      */
-    protected override pollutionGenerated(): number {
+    public override pollutionGenerated(): number {
         return this._maintenaceCost;
     }
 
@@ -209,7 +220,7 @@ export class Warehouse extends Industrial{
      * Warehouse maintenance cost
      * @returns Maintenance cost lost in one month
      */
-    protected override maintenanceLost(): number {
+    public override maintenanceLost(): number {
         return this._maintenaceCost;
     }
     
