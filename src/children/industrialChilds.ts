@@ -1,10 +1,10 @@
-import { Industrial } from "../objects/industrial";
-import { Map } from "../objects/map";
-import { Pair } from "../datastructures/pair";
-import { Matrix } from "../datastructures/matrix";
-import { Queue } from "../datastructures/queue";
+import { Industrial } from "../objects/industrial.js";
+import { Map } from "../objects/map.js";
+import { Pair } from "../datastructures/pair.js";
+import { Matrix } from "../datastructures/matrix.js";
+import { Queue } from "../datastructures/queue.js";
 
-import { List } from "../datastructures/list";
+import { List } from "../datastructures/list.js";
 
 export class Factory extends Industrial{
     

@@ -1,5 +1,5 @@
-import { Facility } from "./facility";
-import { Map } from "./map"
+import { Facility } from "./facility.js";
+import { Map } from "./map.js"
 
 
 export abstract class Residential extends Facility{

@@ -1,5 +1,5 @@
-import { Plot } from "./plot";
-import { Map } from "./map";
+import { Plot } from "./plot.js";
+import { Map } from "./map.js";
 
 export abstract class Facility extends Plot{
     protected _maintenaceCost: number;

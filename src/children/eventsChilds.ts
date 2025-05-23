@@ -1,4 +1,4 @@
-import { GlobalEvent } from "../objects/globalevents"
+import { GlobalEvent } from "../objects/globalevents.js"
 
 export class AlienInvasion extends GlobalEvent{
     static override eventChance: number = 0.01

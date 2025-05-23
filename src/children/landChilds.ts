@@ -1,7 +1,7 @@
-import { Map } from "../objects/map"
-import { Land } from "../objects/land"
+import { Map } from "../objects/map.js"
+import { Land } from "../objects/land.js"
 
-import { List } from "../datastructures/list";
+import { List } from "../datastructures/list.js";
 
 export class Grass extends Land{
     static override buildCost : number = 0;

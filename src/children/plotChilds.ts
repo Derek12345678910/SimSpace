@@ -1,7 +1,7 @@
-import { Map } from "../objects/map"
-import { Plot } from "../objects/plot";
+import { Map } from "../objects/map.js"
+import { Plot } from "../objects/plot.js";
 
-import { List } from "../datastructures/list";
+import { List } from "../datastructures/list.js";
 
 export class PlanetaryDefenseSystem extends Plot{
     static override buildCost: number = 1000000000000;
