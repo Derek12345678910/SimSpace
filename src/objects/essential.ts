@@ -9,10 +9,10 @@ export abstract class Essential extends Facility{
     protected constructor(name: string, buildCost : number, map : Map){
         super(name, buildCost, map);
     }
-    protected revenueEarned(): number {
+    public revenueEarned(): number {
         return 0;
     }
-    protected pollutionGenerated(): number {
+    public pollutionGenerated(): number {
         return 0;
     }
     public get powerGeneration(): number{

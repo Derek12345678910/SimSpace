@@ -11,7 +11,7 @@ import { Map } from "./map";
 /**
  * Functions to build each type of facility
  */
-class BuildFunction{
+export class BuildFunction{
     private _map : Map;
     constructor(map: Map){
         this._map = map;
