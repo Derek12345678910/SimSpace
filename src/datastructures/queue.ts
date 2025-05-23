@@ -1,4 +1,4 @@
-import { List } from "./list"
+import { List } from "./list.js"
 
 /**
  * Queue data structure using a List

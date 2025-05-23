@@ -1,17 +1,17 @@
-import { Map } from "./map"
-import { Plot } from "./plot"
-import { GlobalEvent } from "./globalevents";
-import * as GlobalEventObjects from "../children/eventsChilds"
-import * as LandObjects from "../children/landChilds"
+import { Map } from "./map.js"
+import { Plot } from "./plot.js"
+import { GlobalEvent } from "./globalevents.js";
+import * as GlobalEventObjects from "../children/eventsChilds.js"
+import * as LandObjects from "../children/landChilds.js"
 
-import { Facility } from "./facility";
-import { Residential } from "./residential";
-import { Commercial } from "./commercial";
-import { Industrial } from "./industrial";
-import { Essential } from "./essential";
+import { Facility } from "./facility.js";
+import { Residential } from "./residential.js";
+import { Commercial } from "./commercial.js";
+import { Industrial } from "./industrial.js";
+import { Essential } from "./essential.js";
 
-import { Pair } from "../datastructures/pair"
-import { List } from "../datastructures/list"
+import { Pair } from "../datastructures/pair.js"
+import { List } from "../datastructures/list.js"
   
 /**
  * Class for Game Logic

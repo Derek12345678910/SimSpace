@@ -1,7 +1,7 @@
-import { Residential } from "../objects/residential";
-import { Map } from "../objects/map";
+import { Residential } from "../objects/residential.js";
+import { Map } from "../objects/map.js";
 
-import { List } from "../datastructures/list";
+import { List } from "../datastructures/list.js";
 
 export class AffordableHome extends Residential{
     static override buildCost : number = 50000000;

@@ -1,15 +1,15 @@
-import { Plot } from "./plot"
-import { PlanetaryDefenseSystem } from "../children/plotChilds"; 
+import { Plot } from "./plot.js"
+import { PlanetaryDefenseSystem } from "../children/plotChilds.js"; 
 
-import { Facility } from "./facility";
-import { Residential } from "./residential";
-import { Commercial } from "./commercial";
-import { Industrial } from "./industrial";
-import { Essential } from "./essential";
+import { Facility } from "./facility.js";
+import { Residential } from "./residential.js";
+import { Commercial } from "./commercial.js";
+import { Industrial } from "./industrial.js";
+import { Essential } from "./essential.js";
 
-import { Queue } from "../datastructures/queue";
-import { Pair } from "../datastructures/pair";
-import { Matrix } from "../datastructures/matrix"
+import { Queue } from "../datastructures/queue.js";
+import { Pair } from "../datastructures/pair.js";
+import { Matrix } from "../datastructures/matrix.js"
 
 /**
  * World map
@@ -31,7 +31,9 @@ export class Map {
      */
     public constructor(planetSizeX : number, planetSizeY : number){
         this._grid = new Matrix<Plot>(planetSizeX, planetSizeY, null);
-        this._pollutionGrid = new Matrix<number>(planetSizeX, planetSizeY, 0);        
+        this._pollutionGrid = new Matrix<number>(planetSizeX, planetSizeY, 0); 
+        this._mapSizeX = planetSizeX;
+        this._mapSizeY = planetSizeY;       
     }
 
     /**

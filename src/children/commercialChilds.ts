@@ -1,7 +1,7 @@
-import { Commercial } from "../objects/commercial";
-import { Map } from "../objects/map";
+import { Commercial } from "../objects/commercial.js";
+import { Map } from "../objects/map.js";
 
-import { List } from "../datastructures/list";
+import { List } from "../datastructures/list.js";
 
 /**
  * Store, type of commercial facility

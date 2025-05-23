@@ -1,7 +1,7 @@
-import { Essential } from "../objects/essential";
-import { Map } from "../objects/map";
+import { Essential } from "../objects/essential.js";
+import { Map } from "../objects/map.js";
 
-import { List } from "../datastructures/list";
+import { List } from "../datastructures/list.js";
 
 /**
  * Power Plant, type of essential facility
@@ -28,12 +28,6 @@ export class PowerPlant extends Essential{
     }
     public override updateMonth(): void {
         
-    }
-    static override checkCost(money: number): boolean {
-        return PowerPlant.buildCost <= money;
-    }
-    public override updateMonth(): void {
-       
     }
     static override checkCost(money: number): boolean {
         return PowerPlant.buildCost <= money;

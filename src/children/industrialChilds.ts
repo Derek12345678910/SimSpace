@@ -1,7 +1,7 @@
-import { Industrial } from "../objects/industrial";
-import { Map } from "../objects/map";
+import { Industrial } from "../objects/industrial.js";
+import { Map } from "../objects/map.js";
 
-import { List } from "../datastructures/list";
+import { List } from "../datastructures/list.js";
 
 export class Factory extends Industrial{
     

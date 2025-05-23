@@ -1,0 +1,44 @@
+.buildables{
+    display: flex;
+    position: absolute;
+    height: 25%;
+    width: 100%;
+    bottom: 0;
+    z-index: 1;
+}
+
+.buildables-container{
+    background-color: aliceblue;
+    height: 100%;
+    width: 100%;
+}
+
+.types{
+    height: 15%;
+    width: 100%;
+    top: 0;
+}
+
+.types button{
+    height: 100%;
+    width: 10%;
+    padding: 0;
+}
+
+.objects{
+    display: flex;
+    flex-direction: row;
+    height: 75%;
+    width: 100%;
+    align-items: center;
+    gap: 3px;
+}
+
+.objects button {
+    display: inline-block;
+    margin: 0;
+    height: 75%;
+    width: 20%;
+    text-align: center;
+    align-content: center;
+}

@@ -1,6 +1,6 @@
-import { Map } from "./map"
+import { Map } from "./map.js"
 
-import { List } from "../datastructures/list";
+import { List } from "../datastructures/list.js";
 
 /**
  * Abstract class for a plot of land on the map

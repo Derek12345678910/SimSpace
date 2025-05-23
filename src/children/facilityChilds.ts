@@ -1,7 +1,7 @@
-import { Facility } from "../objects/facility";
-import { Map } from "../objects/map";
+import { Facility } from "../objects/facility.js";
+import { Map } from "../objects/map.js";
 
-import { List } from "../datastructures/list";
+import { List } from "../datastructures/list.js";
 
 export class Warehouse extends Facility{
     static override buildCost: number = 10000000;
