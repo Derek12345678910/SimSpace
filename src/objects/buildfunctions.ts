@@ -1,17 +1,17 @@
-import { Office, Restaurant, Store } from "../children/commercialChilds";
-import { EducationCentre, EmergencyService, Government, Medical, PowerPlant } from "../children/essentialChilds";
-import { EnvironmentalFacility, Factory, Warehouse } from "../children/industrialChilds";
-import { Rock, Tree } from "../children/landChilds";
-import { PlanetaryDefenseSystem } from "../children/plotChilds";
-import { AffordableHome, ComfortableHome, LuxuryHome } from "../children/residentialChilds";
-import { List } from "../datastructures/list";
-import { Map } from "./map";
+import { Office, Restaurant, Store } from "../children/commercialChilds.js";
+import { EducationCentre, EmergencyService, Government, Medical, PowerPlant } from "../children/essentialChilds.js";
+import { EnvironmentalFacility, Factory, Warehouse } from "../children/industrialChilds.js";
+import { Rock, Tree } from "../children/landChilds.js";
+import { PlanetaryDefenseSystem } from "../children/plotChilds.js";
+import { AffordableHome, ComfortableHome, LuxuryHome } from "../children/residentialChilds.js";
+import { List } from "../datastructures/list.js";
+import { Map } from "./map.js";
 
 
 /**
  * Functions to build each type of facility
  */
-class BuildFunction{
+export class BuildFunction{
     private _map : Map;
     constructor(map: Map){
         this._map = map;

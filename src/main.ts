@@ -1,4 +1,6 @@
 import { Game } from "./objects/game.js";
+import { BuildFunction } from "./objects/buildfunctions.js";
+import { GameCanvas } from "./graphics.js";
 
 import * as commercial from "./children/commercialChilds.js";
 import * as essential from "./children/essentialChilds.js";
@@ -7,11 +9,16 @@ import * as land from "./children/landChilds.js";
 import * as plot from "./children/plotChilds.js";
 import * as residential from "./children/residentialChilds.js";
 
+import { Pair } from "./datastructures/pair.js";
+
 const WORLD : Game = new Game(50, 50, 10);
+
+const CANVAS : GameCanvas = new GameCanvas(WORLD.map)
 
 /**
  * Sets the values of the game to the texts for the user to see
  */
+/*
 function updateTexts() : void{
     const SCORE = document.getElementById("score") as HTMLElement;
     const MONEY = document.getElementById("money") as HTMLElement;
@@ -26,7 +33,12 @@ function updateTexts() : void{
     CONTENTPOPULATION.innerText = String(WORLD.contentpopulation);
 
 }
+*/
 
+/**
+ * 
+ * @param type 
+ */
 function changeBuilds(type : string) : void{
     const container = document.getElementById("objects-container") as HTMLDivElement;
     // reset 
@@ -47,7 +59,9 @@ function changeBuilds(type : string) : void{
         for(let i=0; i<objects.length; i++){
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
-
+            newButton.addEventListener("click", () => {
+                placeObject(objects[i].name);
+            });
             container.appendChild(newButton);
         }
     }
@@ -56,7 +70,9 @@ function changeBuilds(type : string) : void{
         for(let i=0; i<objects.length; i++){
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
-
+            newButton.addEventListener("click", () => {
+                placeObject(objects[i].name);
+            });
             container.appendChild(newButton);
         }
     }
@@ -65,7 +81,9 @@ function changeBuilds(type : string) : void{
         for(let i=0; i<objects.length; i++){
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
-
+            newButton.addEventListener("click", () => {
+                placeObject(objects[i].name);
+            });
             container.appendChild(newButton);
         }
     }
@@ -74,7 +92,9 @@ function changeBuilds(type : string) : void{
         for(let i=0; i<objects.length; i++){
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
-
+            newButton.addEventListener("click", () => {
+                placeObject(objects[i].name);
+            });
             container.appendChild(newButton);
         }
     }
@@ -83,31 +103,53 @@ function changeBuilds(type : string) : void{
         for(let i=0; i<objects.length; i++){
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
-
+            newButton.addEventListener("click", () => {
+                placeObject(objects[i].name);
+            });
             container.appendChild(newButton);
         }
     }
 }
 
-function placeObject(objName : string){
-    
+let buildFunctions : BuildFunction = new BuildFunction(WORLD.map);
+
+/**
+ * Place the object of the indicated button
+ * @param objName the name of the object
+ */
+async function placeObject(objName : string){
+    CANVAS.selectedCell = null;
+    let selectedCell = await waitForCellSelect();   
+    // check code here     
 }
 
-// show texts at start
-updateTexts();
+function waitForCellSelect(): Promise<Pair> {
+    return new Promise((resolve) => {
+        function checkSelection() {
+            if (CANVAS.selectedCell !== null) {
+                CANVAS.lookingForSelect = false;
+                resolve(CANVAS.selectedCell);
+            } else {
+                requestAnimationFrame(checkSelection);
+            }
+        }
+        CANVAS.lookingForSelect = true;
+        checkSelection();
+    });
+}
 
-// update functions
-window.addEventListener("DOMContentLoaded", () => {
-  Object.assign(window, {
-    changeBuilds,
-    updateTexts,
-  });
+/**
+ * Event listeners for the changing build types
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.types button');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            let buildType = button.dataset.type;
+            if (buildType) {
+                changeBuilds(buildType);
+            }
+        });
+    });
 });
-
-(window as any).mainFunctions = {
-  changeBuilds,
-  updateTexts,
-};
-// take all from buttons then compare it to the button have it match
-// since we have all buttons loop through
-// call build function 

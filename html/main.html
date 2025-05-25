@@ -6,40 +6,16 @@
         <link rel="stylesheet" href="../css/buildable.css"/>
     </head>
     <body>
-        <div class="values-container">
-            <div class="values-right" style="background-color: greenyellow;">
-                <p id="money"></p>
-                <img class="value-logo" src="https://pngimg.com/d/coin_PNG36871.png">
-            </div>
-            <div class="values-right" style="background-color: aliceblue;">
-                <p id="population"></p>
-                <img class="value-logo" src="https://cdn-icons-png.flaticon.com/512/4623/4623635.png">
-            </div>
-            <div class="values-small-right" style="background-color: palevioletred;">
-                <p id="happy-population"></p>
-                <img class="value-logo" src="https://static.vecteezy.com/system/resources/thumbnails/022/917/027/small_2x/yellow-happy-smile-face-emoticon-png.png">
-            </div>
-            <div class="values-small-right" style="background-color: lightyellow;">
-                <p id="content-population"></p>
-                <img class="value-logo" src="https://icons.iconarchive.com/icons/microsoft/fluentui-emoji-flat/256/Neutral-Face-Flat-icon.png">
-            </div>
-        </div>
-        <div class="score-container">
-            <div class="values-left" style="background-color: lightblue;">
-                <img class="value-logo" src="https://gallery.yopriceville.com/downloadfullsize/send/25865">
-                <p id="score"></p>
-            </div>
-        </div>
 
         <div class="buildables">
             <div class="buildables-container">
                 <div class="types">
-                    <button type="button" onclick="changeBuilds('plot')">Plot</button>
-                    <button type="button" onclick="changeBuilds('commercial')">Commercial</button>
-                    <button type="button" onclick="changeBuilds('essential')">Essential</button>
-                    <button type="button" onclick="changeBuilds('industrial')">Industrial</button>
-                    <button type="button" onclick="changeBuilds('residential')">Residential</button>
-                    <button type="button" onclick="changeBuilds('land')">Land</button>
+                    <button type="button" data-type="plot">Plot</button>
+                    <button type="button" data-type="commercial">Commercial</button>
+                    <button type="button" data-type="essential">Essential</button>
+                    <button type="button" data-type="industrial">Industrial</button>
+                    <button type="button" data-type="residential">Residential</button>
+                    <button type="button" data-type="land">Land</button>
                 </div>
                 <div id="objects-container" class="objects">
                 </div>
@@ -67,6 +43,7 @@
         <script type="module" src="../dist/objects/plot.js"></script>
         <script type="module" src="../dist/objects/residential.js"></script>
         <script type="module" src="../dist/objects/map.js"></script>
+        <script type="module" src="../dist/objects/buildfunctions.js"></script>
 
         <script type="module" src="../dist/children/commercialChilds.js"></script>
         <script type="module" src="../dist/children/essentialChilds.js"></script>
