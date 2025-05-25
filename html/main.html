@@ -5,34 +5,22 @@
         <link rel="stylesheet" href="../css/stats.css"/>
         <link rel="stylesheet" href="../css/buildable.css"/>
     </head>
-    <body>
-        <div class="values-container">
-            <div class="values-right" style="background-color: greenyellow;">
-                <p id="money"></p>
-                <img class="value-logo" src="https://pngimg.com/d/coin_PNG36871.png">
-            </div>
-            <div class="values-right" style="background-color: aliceblue;">
-                <p id="population"></p>
-                <img class="value-logo" src="https://cdn-icons-png.flaticon.com/512/4623/4623635.png">
-            </div>
-            <div class="values-small-right" style="background-color: palevioletred;">
-                <p id="happy-population"></p>
-                <img class="value-logo" src="https://static.vecteezy.com/system/resources/thumbnails/022/917/027/small_2x/yellow-happy-smile-face-emoticon-png.png">
-            </div>
-            <div class="values-small-right" style="background-color: lightyellow;">
-                <p id="content-population"></p>
-                <img class="value-logo" src="https://icons.iconarchive.com/icons/microsoft/fluentui-emoji-flat/256/Neutral-Face-Flat-icon.png">
-            </div>
+    <body>  
+        <div class="game-stats">
+            <p id="score"></p>
+            <p id="money">Money</p>
+            <p id="population">Population</p>
+            <p id="happy-population">Happy Population</p>
+            <p id="content-population">Content Population</p>
+            <p id="pollution">Pollution</p>
+            <p id="power">Power</p>
         </div>
-        <div class="score-container">
-            <div class="values-left" style="background-color: lightblue;">
-                <img class="value-logo" src="https://gallery.yopriceville.com/downloadfullsize/send/25865">
-                <p id="score"></p>
-            </div>
-        </div>
-
         <div class="buildables">
             <div class="buildables-container">
+                <div class="time-control">
+                    <button type="button" id="toggle-time"></button>
+                    <p id="time-display"></p>
+                </div>
                 <div class="types">
                     <button type="button" onclick="changeBuilds('plot')">Plot</button>
                     <button type="button" onclick="changeBuilds('commercial')">Commercial</button>
@@ -71,7 +59,6 @@
         <script type="module" src="../dist/children/commercialChilds.js"></script>
         <script type="module" src="../dist/children/essentialChilds.js"></script>
         <script type="module" src="../dist/children/eventsChilds.js"></script>
-        <script type="module" src="../dist/children/facilityChilds.js"></script>
         <script type="module" src="../dist/children/industrialChilds.js"></script>
         <script type="module" src="../dist/children/landChilds.js"></script>
 

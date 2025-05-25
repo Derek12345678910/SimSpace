@@ -10,28 +10,93 @@ import * as residential from "./children/residentialChilds.js";
 
 const WORLD : Game = new Game(50, 50, 10);
 const BuildFunctions :BuildFunction = new BuildFunction(WORLD.map);
+
+// if the timer is running or not
 let timeOn: boolean = true;
 
-let tickMonth = setInterval(WORLD.updateNewMonth,10000)   
-clearInterval(tickMonth);
+// button that toggles the timer on and off
+const TOGGLEBUTTON = document.getElementById("toggle-time") as HTMLButtonElement;
+const TIMEDISPLAY = document.getElementById("time-display") as HTMLElement;
 
+let monthInterval: ReturnType<typeof setInterval> | null = null;
+let seconds: number = 0;
+
+
+/**
+ * Displays time until new month and how many months have passed
+ */
+function updateTimeDisplay(): void{
+    TIMEDISPLAY.innerText = `New month in: ${10-(seconds%10)}
+                             Month: ${Math.floor(seconds/10)}`
+}
+
+/**
+ * Ticks the time by 1 second, if the time is a multiple of 10, updates new month
+ */
+function tickTime():void{
+    monthInterval = setInterval(() => {
+        if(timeOn){
+            seconds++
+            updateTimeDisplay();
+            if(seconds%10 === 0){
+                WORLD.updateNewMonth();
+                updateTexts();
+            }
+        }
+    }, 1000)
+}
+
+/**
+ * Pause/play function, that either runs or stops the tickTime() function
+ */
+function toggleTime(){
+    timeOn = !timeOn;
+    if(timeOn){
+        TOGGLEBUTTON.innerHTML = "Pause"
+    }
+    else{
+        TOGGLEBUTTON.innerHTML = "Play"
+    }
+
+    if(timeOn && !monthInterval){
+        tickTime();
+    }
+
+    if(!timeOn && monthInterval){
+        clearInterval(monthInterval);
+        monthInterval = null;
+    }
+}
+
+// run the time when the game loads
+document.addEventListener("DOMContentLoaded", () =>{
+    tickTime();
+    updateTimeDisplay();
+    TOGGLEBUTTON.innerHTML = "Pause";
+    TOGGLEBUTTON.addEventListener("click", toggleTime);
+})
 
 
 /**
  * Sets the values of the game to the texts for the user to see
  */
 function updateTexts() : void{
+    console.log("hi");
     const SCORE = document.getElementById("score") as HTMLElement;
     const MONEY = document.getElementById("money") as HTMLElement;
     const POPULATION = document.getElementById("population") as HTMLElement;
     const HAPPYPOPULATION = document.getElementById("happy-population") as HTMLElement;
     const CONTENTPOPULATION = document.getElementById("content-population") as HTMLElement;
+    const POWER = document.getElementById("power") as HTMLElement;
+    const POLLUTION = document.getElementById("pollution") as HTMLElement; 
 
-    SCORE.innerText = String(WORLD.score);
-    MONEY.innerText = String(WORLD.money);
-    POPULATION.innerText = String(WORLD.population);
-    HAPPYPOPULATION.innerText = String(WORLD.happypopulation);
-    CONTENTPOPULATION.innerText = String(WORLD.contentpopulation);
+    SCORE.innerText =  `Score: ${WORLD.score}`;
+    MONEY.innerText = `Money: ${WORLD.money}`;
+    POPULATION.innerText = `Population: ${WORLD.population}`;
+    HAPPYPOPULATION.innerText = `Happy Population: ${WORLD.happypopulation}`;
+    CONTENTPOPULATION.innerText = `Content Population: ${WORLD.contentpopulation}`;
+    POWER.innerText = `Power: ${WORLD.power}`;
+    POLLUTION.innerText = `Pollution ${WORLD.pollution}`;
 
 }
 
@@ -172,3 +237,4 @@ window.addEventListener("DOMContentLoaded", () => {
 // take all from buttons then compare it to the button have it match
 // since we have all buttons loop through
 // call build function 
+
