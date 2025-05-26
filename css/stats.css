@@ -1,4 +1,39 @@
-.game-stats{
-    justify-content: left;
-    left: 100px;
+.menu{
+    z-index: 1;
+    position: absolute;
+    height: 30%;
+    width: 20%;
+    right: 0;
+    background-color: #292424ae;
+    margin: 10px;
+}
+
+.menu .stats{
+    display: flex;
+    height: 70%;
+    margin: 2%;
+    flex-direction: column;
+    gap: 2%;
+}
+
+.menu .stats p{
+    height: 10%;
+    margin: 0;
+    color: white;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.menu .timer{
+    display: flex;
+    height: 26%;
+    margin: 2%;
+    justify-content: center;
+    gap: 5%;
+}
+
+.menu .timer button{
+    height: 100%;
+    width: 50%;
 }

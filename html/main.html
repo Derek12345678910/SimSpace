@@ -5,15 +5,19 @@
         <link rel="stylesheet" href="../css/stats.css"/>
         <link rel="stylesheet" href="../css/buildable.css"/>
     </head>
-    <body>  
-        <div class="game-stats">
-            <p id="score"></p>
-            <p id="money">Money</p>
-            <p id="population">Population</p>
-            <p id="happy-population">Happy Population</p>
-            <p id="content-population">Content Population</p>
-            <p id="pollution">Pollution</p>
-            <p id="power">Power</p>
+    <body>
+        <div class="menu">
+            <div class="stats">
+                <p id="money"></p>
+                <p id="population"></p>
+                <p id="happy-population"></p>
+                <p id="content-population"></p>
+                <p id="score"></p>
+            </div>
+            <div class="timer">
+                <button>Play</button>
+                <button>Pause</button>
+            </div>
         </div>
         <div class="buildables">
             <div class="buildables-container">
@@ -22,12 +26,12 @@
                     <p id="time-display"></p>
                 </div>
                 <div class="types">
-                    <button type="button" onclick="changeBuilds('plot')">Plot</button>
-                    <button type="button" onclick="changeBuilds('commercial')">Commercial</button>
-                    <button type="button" onclick="changeBuilds('essential')">Essential</button>
-                    <button type="button" onclick="changeBuilds('industrial')">Industrial</button>
-                    <button type="button" onclick="changeBuilds('residential')">Residential</button>
-                    <button type="button" onclick="changeBuilds('land')">Land</button>
+                    <button type="button" data-type="plot">Plot</button>
+                    <button type="button" data-type="commercial">Commercial</button>
+                    <button type="button" data-type="essential">Essential</button>
+                    <button type="button" data-type="industrial">Industrial</button>
+                    <button type="button" data-type="residential">Residential</button>
+                    <button type="button" data-type="land">Land</button>
                 </div>
                 <div id="objects-container" class="objects">
                 </div>
@@ -55,6 +59,7 @@
         <script type="module" src="../dist/objects/plot.js"></script>
         <script type="module" src="../dist/objects/residential.js"></script>
         <script type="module" src="../dist/objects/map.js"></script>
+        <script type="module" src="../dist/objects/buildfunctions.js"></script>
 
         <script type="module" src="../dist/children/commercialChilds.js"></script>
         <script type="module" src="../dist/children/essentialChilds.js"></script>
