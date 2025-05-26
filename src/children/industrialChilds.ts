@@ -42,7 +42,7 @@ export class Factory extends Industrial{
      * @returns Revenue earned in one month
      */
     public revenueEarned(): number {
-        let distance: number = this._map.plotBfs(this._xPosition, this._yPosition, "Warehouse");
+        let distance: number = this._map.plotBfs(this._xPosition, this._yPosition, "Warehouse", this._map);
         let multiplier: number = 1;
         if(distance!==-1&&distance<6){
             multiplier = 2;

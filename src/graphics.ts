@@ -68,6 +68,7 @@ export class GameCanvas {
         this.isDragging = true;
         this.dragStartX = e.clientX - this.originX;
         this.dragStartY = e.clientY - this.originY;
+        this.draw()
     }
 
     private handleMouseMove(e: MouseEvent) {
@@ -111,7 +112,7 @@ export class GameCanvas {
         this.draw();
     }
 
-    private draw(): void {
+    public draw(): void {
         this.ctx.setTransform(this.scale, 0, 0, this.scale, this.originX, this.originY);
         this.ctx.clearRect(-this.originX / this.scale, -this.originY / this.scale, this.canvas.width / this.scale, this.canvas.height / this.scale);
 
