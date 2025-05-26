@@ -2,6 +2,7 @@ import { Game } from "./objects/game.js";
 import { BuildFunction } from "./objects/buildfunctions.js";
 import { GameCanvas } from "./graphics.js";
 
+import { BuildFunction } from "./objects/buildfunctions.js";
 import * as commercial from "./children/commercialChilds.js";
 import * as essential from "./children/essentialChilds.js";
 import * as industrial from "./children/industrialChilds.js";
@@ -14,23 +15,95 @@ import { Pair } from "./datastructures/pair.js";
 const WORLD : Game = new Game(50, 50, 10);
 
 const CANVAS : GameCanvas = new GameCanvas(WORLD.map)
+const BuildFunctions :BuildFunction = new BuildFunction(WORLD.map);
+
+// if the timer is running or not
+let timeOn: boolean = true;
+
+// button that toggles the timer on and off
+const TOGGLEBUTTON = document.getElementById("toggle-time") as HTMLButtonElement;
+const TIMEDISPLAY = document.getElementById("time-display") as HTMLElement;
+
+let monthInterval: ReturnType<typeof setInterval> | null = null;
+let seconds: number = 0;
+
+
+/**
+ * Displays time until new month and how many months have passed
+ */
+function updateTimeDisplay(): void{
+    TIMEDISPLAY.innerText = `New month in: ${10-(seconds%10)}
+                             Month: ${Math.floor(seconds/10)}`
+}
+
+/**
+ * Ticks the time by 1 second, if the time is a multiple of 10, updates new month
+ */
+function tickTime():void{
+    monthInterval = setInterval(() => {
+        if(timeOn){
+            seconds++
+            updateTimeDisplay();
+            if(seconds%10 === 0){
+                WORLD.updateNewMonth();
+                updateTexts();
+            }
+        }
+    }, 1000)
+}
+
+/**
+ * Pause/play function, that either runs or stops the tickTime() function
+ */
+function toggleTime(){
+    timeOn = !timeOn;
+    if(timeOn){
+        TOGGLEBUTTON.innerHTML = "Pause"
+    }
+    else{
+        TOGGLEBUTTON.innerHTML = "Play"
+    }
+
+    if(timeOn && !monthInterval){
+        tickTime();
+    }
+
+    if(!timeOn && monthInterval){
+        clearInterval(monthInterval);
+        monthInterval = null;
+    }
+}
+
+// run the time when the game loads
+document.addEventListener("DOMContentLoaded", () =>{
+    tickTime();
+    updateTimeDisplay();
+    TOGGLEBUTTON.innerHTML = "Pause";
+    TOGGLEBUTTON.addEventListener("click", toggleTime);
+})
+
 
 /**
  * Sets the values of the game to the texts for the user to see
  */
 
 function updateTexts() : void{
+    console.log("hi");
     const SCORE = document.getElementById("score") as HTMLElement;
     const MONEY = document.getElementById("money") as HTMLElement;
     const POPULATION = document.getElementById("population") as HTMLElement;
     const HAPPYPOPULATION = document.getElementById("happy-population") as HTMLElement;
     const CONTENTPOPULATION = document.getElementById("content-population") as HTMLElement;
+    const POWER = document.getElementById("power") as HTMLElement;
+    const POLLUTION = document.getElementById("pollution") as HTMLElement; 
 
-    SCORE.innerText = `Score: ${String(WORLD.score)}`;
-    MONEY.innerText = `Money: ${String(WORLD.money)}`;
-    POPULATION.innerText = `Population: ${String(WORLD.population)}`;
-    HAPPYPOPULATION.innerText = `Happy Population: ${String(WORLD.happypopulation)}`;
-    CONTENTPOPULATION.innerText = `Content Population: ${String(WORLD.contentpopulation)}`;
+    SCORE.innerText =  `Score: ${WORLD.score}`;
+    MONEY.innerText = `Money: ${WORLD.money}`;
+    POPULATION.innerText = `Population: ${WORLD.population}`;
+    HAPPYPOPULATION.innerText = `Happy Population: ${WORLD.happypopulation}`;
+    CONTENTPOPULATION.innerText = `Content Population: ${WORLD.contentpopulation}`;
+    POWER.innerText = `Power: ${WORLD.power}`;
+    POLLUTION.innerText = `Pollution ${WORLD.pollution}`;
 
 }
 
@@ -151,6 +224,72 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+let x: number = 0;
+let y: number = 0;
+
+function placeObject(objName : string): void{
+    if(objName === "Rock"){
+        BuildFunctions.buildRock(x, y, WORLD.money);
+    }
+    else if(objName === "Tree"){
+        BuildFunctions.buildTree(x,y,WORLD.money);
+    }
+    else if(objName === "Factory"){
+        BuildFunctions.buildFactory(x,y,WORLD.money);
+    }
+    else if(objName === "Environmental Facility"){
+        BuildFunctions.buildEnvironmentalFacility(x,y,WORLD.money);
+    }
+    else if(objName === "Warehouse"){
+        BuildFunctions.buildWarehouse(x,y,WORLD.money);
+    }
+    else if(objName === "Power Plant"){
+        BuildFunctions.buildPowerPlant(x,y,WORLD.money);
+    }
+    else if(objName === "Emergency Service"){
+        BuildFunctions.buildEmergencyService(x,y,WORLD.money);
+    }
+    else if(objName === "Education Centre"){
+        BuildFunctions.buildEducationCentre(x,y,WORLD.money);
+    }
+    else if(objName === "Medical Facility"){
+        BuildFunctions.buildMedicalFacility(x,y,WORLD.money);
+    }
+    else if(objName === "Government Facility"){
+        BuildFunctions.buildGovernmentFacility(x,y,WORLD.money);
+    }
+    else if(objName === "Comfortable Home"){
+        BuildFunctions.buildComfortableHome(x,y,WORLD.money);
+    }
+    else if(objName === "Affordable Home"){
+        BuildFunctions.buildAffordableHome(x,y,WORLD.money);
+    }
+    else if(objName === "Luxury Home"){
+        BuildFunctions.buildLuxuryHome(x,y,WORLD.money);
+    }
+    else if(objName === "Restaurant"){
+        BuildFunctions.buildRestaurant(x,y,WORLD.money);
+    }
+    else if(objName === "Office"){
+        BuildFunctions.buildOffice(x,y,WORLD.money);
+    }
+    else if(objName === "Store"){
+        BuildFunctions.buildStore(x,y,WORLD.money);
+    }
+    else if(objName === "Planetary Defense System"){
+        BuildFunctions.buildPlanetaryDefenseSystem(x,y,WORLD.money);
+    }
+}
+
+// show texts at start
+updateTexts();
+
+// update functions
+window.addEventListener("DOMContentLoaded", () => {
+  Object.assign(window, {
+    changeBuilds,
+    updateTexts,
+  });
 });
 
 updateTexts();

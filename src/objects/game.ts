@@ -120,9 +120,10 @@ export class Game {
      * Called every month to update the world
      */
     public updateNewMonth() : void {
+        console.log("new month");
         this.checkEvents();
 
-        this._time ++;
+        this._time += 10;
 
         for(let i=0; i<this._map.mapSizeY; i++){
             for(let j=0; j<this._map.mapSizeX; j++){
