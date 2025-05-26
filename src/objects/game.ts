@@ -99,6 +99,14 @@ export class Game {
     }
 
     /**
+     * Sets the users money
+     * @param newMoney New amount of money
+     */
+    public set money(newMoney: number){
+        this._money = newMoney;
+    }
+
+    /**
      * @returns score of the world
      */
     public get score() : number{

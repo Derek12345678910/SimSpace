@@ -199,54 +199,105 @@ async function placeObject(objName : string){
     console.log(selectedCell);
         if(objName === "Rock"){
         problems = (buildFunctions.buildRock(selectedCell.key, selectedCell.val, WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - land.Rock.buildCost;
+        }
     }
     else if(objName === "Tree"){
         problems = (buildFunctions.buildTree(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - land.Tree.buildCost;
+        }
     }
     else if(objName === "Factory"){
         problems = (buildFunctions.buildFactory(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - industrial.Factory.buildCost;
+        }
     }
     else if(objName === "EnvironmentalFacility"){
         problems = (buildFunctions.buildEnvironmentalFacility(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - industrial.EnvironmentalFacility.buildCost;
+        }
     }
     else if(objName === "Warehouse"){
         problems = (buildFunctions.buildWarehouse(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - industrial.Warehouse.buildCost;
+        }
     }
     else if(objName === "PowerPlant"){
         problems = (buildFunctions.buildPowerPlant(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - essential.PowerPlant.buildCost;
+        }
     }
     else if(objName === "EmergencyService"){
         problems = (buildFunctions.buildEmergencyService(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - essential.EmergencyService.buildCost;
+        }
     }
     else if(objName === "EducationCentre"){
         problems = (buildFunctions.buildEducationCentre(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - essential.EducationCentre.buildCost;
+        }
     }
     else if(objName === "Medical"){
         problems = (buildFunctions.buildMedicalFacility(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - essential.Medical.buildCost;
+        }
     }
     else if(objName === "Government"){
         problems = (buildFunctions.buildGovernmentFacility(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - essential.Government.buildCost;
+        }
     }
     else if(objName === "ComfortableHome"){
         problems = (buildFunctions.buildComfortableHome(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - residential.ComfortableHome.buildCost;
+        }
     }
     else if(objName === "AffordableHome"){
         problems = (buildFunctions.buildAffordableHome(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - residential.AffordableHome.buildCost;
+        }
     }
     else if(objName === "LuxuryHome"){
         problems = (buildFunctions.buildLuxuryHome(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - residential.LuxuryHome.buildCost;
+        }
     }
     else if(objName === "Restaurant"){
         problems = (buildFunctions.buildRestaurant(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - commercial.Restaurant.buildCost;
+        }
     }
     else if(objName === "Office"){
         problems = (buildFunctions.buildOffice(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - commercial.Office.buildCost;
+        }
     }
     else if(objName === "Store"){
         problems = (buildFunctions.buildStore(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - commercial.Store.buildCost;
+        }
     }
     else if(objName === "PlanetaryDefenseSystem"){
         problems = (buildFunctions.buildPlanetaryDefenseSystem(selectedCell.key, selectedCell.val,WORLD.money));
+        if(problems.length === 0){
+            WORLD.money = WORLD.money - plot.PlanetaryDefenseSystem.buildCost;
+        }
     }
     console.log(WORLD.map);
     console.log(problems)
