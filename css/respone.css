@@ -1,0 +1,14 @@
+.response{
+    z-index: 1;
+    position: absolute;
+    height: 20%;
+    width: 20%;
+    background-color: #292424ae;
+    left: 0;
+    margin: 10px;
+}
+
+.response p{
+    margin: 5px;
+    color: white;
+}

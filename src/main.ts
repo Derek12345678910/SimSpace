@@ -27,13 +27,11 @@ const TIMEDISPLAY = document.getElementById("time-display") as HTMLElement;
 let monthInterval: ReturnType<typeof setInterval> | null = null;
 let seconds: number = 0;
 
-
 /**
  * Displays time until new month and how many months have passed
  */
 function updateTimeDisplay(): void{
-    TIMEDISPLAY.innerText = `New month in: ${10-(seconds%10)}
-                             Month: ${Math.floor(seconds/10)}`
+    TIMEDISPLAY.innerText = `New month in: ${10-(seconds%10)} \n Month: ${Math.floor(seconds/10)}`
 }
 
 /**
@@ -88,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () =>{
  */
 
 function updateTexts() : void{
-    console.log("hi");
     const SCORE = document.getElementById("score") as HTMLElement;
     const MONEY = document.getElementById("money") as HTMLElement;
     const POPULATION = document.getElementById("population") as HTMLElement;
@@ -193,7 +190,8 @@ let buildFunctions : BuildFunction = new BuildFunction(WORLD.map);
 async function placeObject(objName : string){
     CANVAS.selectedCell = null;
     let selectedCell = await waitForCellSelect();  
-    let problems : List<string>; 
+    let problems : List<string> = new List<string>(); 
+    const RESPONDER = document.getElementById("responder") as HTMLElement;
     console.log(selectedCell);
         if(objName === "Rock"){
         problems = (buildFunctions.buildRock(selectedCell.key, selectedCell.val, WORLD.money));
@@ -247,7 +245,12 @@ async function placeObject(objName : string){
         problems = (buildFunctions.buildPlanetaryDefenseSystem(selectedCell.key, selectedCell.val,WORLD.money));
     }
     console.log(WORLD.map);
+    console.log(problems)
     CANVAS.selectedCell = null;
+    RESPONDER.innerText = "";
+    for(let i=0; i<problems.length; i++){
+        RESPONDER.innerText += `${problems.get(i)} \n`
+    }
     CANVAS.draw();
 }
 
@@ -285,10 +288,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 })
-let x: number = 0;
-let y: number = 0;
-
-
 
 // show texts at start
 updateTexts();
@@ -300,5 +299,3 @@ window.addEventListener("DOMContentLoaded", () => {
     updateTexts,
   });
 });
-
-updateTexts();

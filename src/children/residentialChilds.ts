@@ -47,7 +47,6 @@ export class AffordableHome extends Residential{
         if(!map.searchRange(x, y, "Store", 5, map.plotBfs)){ problems.push("Store") }
 
         if(!map.searchRange(x, y, "Restaurant", 8, map.plotBfs)){ problems.push("Restaurant") }
-
         return problems;
     }
 

@@ -245,8 +245,9 @@ export class Map {
      * @returns True if the target is within a certain range
      */
     public searchRange(x : number, y : number, targetName : string, range : number, bfsFunc : any) : boolean {
+        let search : number = bfsFunc(x, y, targetName, this)
         // inside range
-        if(bfsFunc(x, y, targetName, this) <= range){
+        if(search <= range && search !== -1){
             return true;
         }
         return false;
