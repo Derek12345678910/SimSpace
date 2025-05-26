@@ -18,7 +18,7 @@ const CANVAS : GameCanvas = new GameCanvas(WORLD.map)
 /**
  * Sets the values of the game to the texts for the user to see
  */
-/*
+
 function updateTexts() : void{
     const SCORE = document.getElementById("score") as HTMLElement;
     const MONEY = document.getElementById("money") as HTMLElement;
@@ -26,14 +26,13 @@ function updateTexts() : void{
     const HAPPYPOPULATION = document.getElementById("happy-population") as HTMLElement;
     const CONTENTPOPULATION = document.getElementById("content-population") as HTMLElement;
 
-    SCORE.innerText = String(WORLD.score);
-    MONEY.innerText = String(WORLD.money);
-    POPULATION.innerText = String(WORLD.population);
-    HAPPYPOPULATION.innerText = String(WORLD.happypopulation);
-    CONTENTPOPULATION.innerText = String(WORLD.contentpopulation);
+    SCORE.innerText = `Score: ${String(WORLD.score)}`;
+    MONEY.innerText = `Money: ${String(WORLD.money)}`;
+    POPULATION.innerText = `Population: ${String(WORLD.population)}`;
+    HAPPYPOPULATION.innerText = `Happy Population: ${String(WORLD.happypopulation)}`;
+    CONTENTPOPULATION.innerText = `Content Population: ${String(WORLD.contentpopulation)}`;
 
 }
-*/
 
 /**
  * 
@@ -153,3 +152,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+updateTexts();
