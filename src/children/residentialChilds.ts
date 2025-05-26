@@ -24,7 +24,8 @@ export class AffordableHome extends Residential{
 
         this._xPosition = x;
         this._yPosition = y;
-
+        this._image = new Image();
+        this._image.src = "../src/assets/affordable-home-image.png"
     }
 
     public override updateMonth(): void {
@@ -128,6 +129,8 @@ export class LuxuryHome extends Residential{
         this._xPosition = x;
         this._yPosition = y;
 
+        this._image = new Image();
+        this._image.src = "../src/assets/luxury-home-image.png"
     }
 
     public override updateMonth(): void {
@@ -237,6 +240,8 @@ export class ComfortableHome extends Residential{
         this._xPosition = x;
         this._yPosition = y;
 
+        this._image = new Image();
+        this._image.src = "../src/assets/comfortable-home-image.png"
     }
 
     public override updateMonth(): void {

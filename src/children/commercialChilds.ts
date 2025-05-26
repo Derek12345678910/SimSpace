@@ -24,6 +24,8 @@ export class Store extends Commercial{
 
         this._xPosition = x;
         this._yPosition = y;
+        this._image = new Image();
+        this._image.src = "../src/assets/store-image.png"
     }
 
     public override updateMonth(): void {
@@ -98,6 +100,8 @@ export class Office extends Commercial{
 
         this._xPosition = x;
         this._yPosition = y;
+        this._image = new Image();
+        this._image.src = "../src/assets/office-image.png"
     }
     public override updateMonth(): void {
         this._buildingAge+=1;
@@ -172,7 +176,8 @@ export class Restaurant extends Commercial{
 
         this._xPosition = x;
         this._yPosition = y;
-         
+        this._image = new Image();
+        this._image.src = "../src/assets/restaurant-image.png"
     }
     public override updateMonth(): void {
         this._buildingAge+=1

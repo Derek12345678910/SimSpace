@@ -12,6 +12,8 @@ export class PlanetaryDefenseSystem extends Plot{
         this._xPosition = x;
         this._yPosition = y;
 
+        this._image = new Image();
+        this._image.src = "../src/assets/planetary-defense-image.png"
     }
 
     public override updateMonth(): void {

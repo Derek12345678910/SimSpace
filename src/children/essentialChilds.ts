@@ -24,6 +24,8 @@ export class PowerPlant extends Essential{
 
         this._xPosition = x;
         this._yPosition = y;
+        this._image = new Image();
+        this._image.src = "../src/assets/power-plant-image.png"
 
     }
     public override updateMonth(): void {
@@ -86,7 +88,8 @@ export class EmergencyService extends Essential{
 
         this._xPosition = x;
         this._yPosition = y;
-
+        this._image = new Image();
+        this._image.src = "../src/assets/emergency-service-image.png"
     }
     public override updateMonth(): void {
         this._buildingAge+=1;
@@ -150,6 +153,8 @@ export class EducationCentre extends Essential{
 
         this._xPosition = x;
         this._yPosition = y;
+        this._image = new Image();
+        this._image.src = "../src/assets/school-image.png"
 
     }
     public override updateMonth(): void {
@@ -215,6 +220,8 @@ export class Medical extends Essential{
         this._xPosition = x;
         this._yPosition = y;
 
+        this._image = new Image();
+        this._image.src = "../src/assets/medical-facility-image.png"
     }
     public override updateMonth(): void {
         this._buildingAge+=1;
@@ -278,6 +285,8 @@ export class Government extends Essential{
 
         this._xPosition = x;
         this._yPosition = y;
+        this._image = new Image();
+        this._image.src = "../src/assets/government-imagfe.png"
 
     }
     public override updateMonth(): void {

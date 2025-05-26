@@ -11,6 +11,9 @@ export class Grass extends Land{
         super(Grass.buildingName, Grass.buildCost, map);
         this._xPosition = x;
         this._yPosition = y;
+
+        this._image = new Image();
+        this._image.src = "../src/assets/grass-image.png"
     }
 
     public override updateMonth(): void {
@@ -40,6 +43,8 @@ export class Rock extends Land{
         super(Rock.buildingName, Rock.buildCost, map);
         this._xPosition = x;
         this._yPosition = y;
+        this._image = new Image();
+        this._image.src = "../src/assets/rock-image.png"
     }
 
     public override updateMonth(): void {
@@ -69,6 +74,8 @@ export class Tree extends Land{
         super(Tree.buildingName, Tree.buildCost, map);
         this._xPosition = x;
         this._yPosition = y;
+        this._image = new Image();
+        this._image.src = "../src/assets/rock-image.png"
     }
 
     public override updateMonth(): void {

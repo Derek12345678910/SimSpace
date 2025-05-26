@@ -31,6 +31,8 @@ export class Factory extends Industrial{
         
         this._xPosition = x;
         this._yPosition = y;
+        this._image = new Image();
+        this._image.src = "../src/assets/factory-image.png"
 
     }
     public override updateMonth(): void {
@@ -113,6 +115,8 @@ export class EnvironmentalFacility extends Industrial{
 
         this._xPosition = x;
         this._yPosition = y;
+        this._image = new Image();
+        this._image.src = "../src/assets/environmental-facility-image.png"
     }
     public override updateMonth(): void {
         this._buildingAge+=1;
@@ -190,6 +194,8 @@ export class Warehouse extends Industrial{
         this._xPosition = x;
         this._yPosition = y;
 
+        this._image = new Image();
+        this._image.src = "../src/assets/warehouse-image.png"
     }
 
     public override updateMonth(): void {

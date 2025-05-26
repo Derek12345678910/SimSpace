@@ -17,6 +17,7 @@ export abstract class Plot {
     protected _buildingAge : number;
     protected _xPosition : number;
     protected _yPosition : number;
+    protected _image : HTMLImageElement;
 
     /**
      * @returns build cost of the plot
@@ -51,6 +52,10 @@ export abstract class Plot {
      */
     public set buildingAge(age : number){
         this._buildingAge = age;
+    }
+
+    public get image(): HTMLImageElement{
+        return this._image;
     }
 
     /**
