@@ -38,7 +38,7 @@ export abstract class Facility extends Plot{
     }
 
     public abstract revenueEarned(): number
-    public abstract pollutionGenerated(): number
+    public abstract pollutionGenerated(): void
     public abstract maintenanceLost(): number
 
 }

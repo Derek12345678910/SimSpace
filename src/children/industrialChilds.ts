@@ -60,20 +60,28 @@ export class Factory extends Industrial{
      * Factory pollution
      * @returns Pollution generated in one month
      */    
-    public pollutionGenerated(): number {
-        return this._pollution;
+    public pollutionGenerated(): void {
+        let existingPollution = this._map.getPollutionCoord(this._xPosition, this._yPosition);
+        if(existingPollution){
+            this._map.setPollutionGridCoord(this._xPosition, this._yPosition, this._pollution+existingPollution);
+        }
+        else{
+            this._map.setPollutionGridCoord(this._xPosition, this._yPosition, this._pollution);
+        }
     }
 
     /**
      * Factory maintenance cost lost
      * @returns Maintenance cost in one month
      */
-    public maintenanceLost(): number {
+    public override maintenanceLost(): number {
         if(this._buildingAge>=this.months){
             return this.finalMaintenance;
         }
         return this._buildingAge*100000;
     }
+
+
     static override isBuildable(x: number, y: number, map: Map) : List<string> {
         let problems : List<string> = new List<string>();
         if(!map.searchRange(x, y, "Power Plant", 6, map.plotBfs)){ problems.push("Power Plant") }
