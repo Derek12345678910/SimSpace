@@ -174,7 +174,7 @@ async function placeObject(objName : string){
         console.log(buildFunctions.buildPlanetaryDefenseSystem(selectedCell.key, selectedCell.val,WORLD.money));
     }
     console.log(WORLD.map);
-    // check code here     
+    
 }
 
 function waitForCellSelect(): Promise<Pair> {

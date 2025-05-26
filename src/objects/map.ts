@@ -135,12 +135,12 @@ export class Map {
      * @param targetName name of the Plot target
      * @returns the distance of the closest target
      */
-    public plotBfs(x : number, y : number, targetName : string) : number{
-    
+    public plotBfs(x : number, y : number, targetName : string, map : Map) : number{
+
         let q : Queue<Pair> = new Queue<Pair>();
 
         // a matrix holding the distances of each unit relative to the starting point
-        let vis : Matrix<number> = new Matrix<number>(this._mapSizeX, this._mapSizeY, -1);
+        let vis : Matrix<number> = new Matrix<number>(map.mapSizeX, map.mapSizeY, -1);
 
         q.enqueue(new Pair(x, y));
         vis.setCoord(x, y, 0); // set start 0
@@ -149,18 +149,18 @@ export class Map {
 
             let cur : Pair = q.dequeue() as Pair;
             let dis : number = vis.getCoord(cur.key, cur.val) as number;
-            let curObject : Plot = this._grid.getCoord(cur.key, cur.val) as Plot
+            let curObject : Plot = map._grid.getCoord(cur.key, cur.val) as Plot
 
             // if you hit the target
             if(curObject.name === targetName){
                 return dis;
             }
 
-            for(let i=0; i<this.bfsDirections.length; i++){
-                let direction : Pair = this.bfsDirections[i];
+            for(let i=0; i<map.bfsDirections.length; i++){
+                let direction : Pair = map.bfsDirections[i];
                 let nxt : Pair = new Pair(cur.key + direction.key, cur.val + direction.val);
                 // check if the new coord is not visited and is inside the map
-                if(vis.getCoord(nxt.key, nxt.val) !== -1 && nxt.key >= 0 && nxt.key < this._mapSizeX && nxt.val >= 0 && nxt.val < this.mapSizeY){
+                if(vis.getCoord(nxt.key, nxt.val) !== -1 && nxt.key >= 0 && nxt.key < map.mapSizeX && nxt.val >= 0 && nxt.val < map.mapSizeY){
                     vis.setCoord(nxt.key, nxt.val, dis + 1);
                     q.enqueue(nxt);
                 }
@@ -177,12 +177,12 @@ export class Map {
      * @param typeName name of the type of facility
      * @returns the distance of the closest target
      */
-    public typeBfs(x : number, y : number, typeName : string) : number{
+    public typeBfs(x : number, y : number, typeName : string, map : Map) : number{
     
         let q : Queue<Pair> = new Queue<Pair>();
 
         // a matrix holding the distances of each unit relative to the starting point
-        let vis : Matrix<number> = new Matrix<number>(this._mapSizeX, this._mapSizeY, -1);
+        let vis : Matrix<number> = new Matrix<number>(map.mapSizeX, map.mapSizeY, -1);
 
         q.enqueue(new Pair(x, y));
         vis.setCoord(x, y, 0); // set start 0
@@ -246,7 +246,7 @@ export class Map {
      */
     public searchRange(x : number, y : number, targetName : string, range : number, bfsFunc : any) : boolean {
         // inside range
-        if(bfsFunc(x, y, targetName) <= range){
+        if(bfsFunc(x, y, targetName, this) <= range){
             return true;
         }
         return false;

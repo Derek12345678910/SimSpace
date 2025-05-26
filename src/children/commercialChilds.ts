@@ -35,7 +35,7 @@ export class Store extends Commercial{
      * @returns Revenue earned by store in one month
      */
     public override revenueEarned(): number {
-        let distance: number = this._map.typeBfs(this._xPosition, this._yPosition, "Residential");
+        let distance: number = this._map.typeBfs(this._xPosition, this._yPosition, "Residential", this._map);
         if(distance>6){
             return (6/distance)*this._revenue;
         }
@@ -55,7 +55,7 @@ export class Store extends Commercial{
      * @returns Maintenance cost of store in one month
      */
     public override maintenanceLost(): number {
-        let distance: number = this._map.typeBfs(this._xPosition, this._yPosition, "Residential");
+        let distance: number = this._map.typeBfs(this._xPosition, this._yPosition, "Residential", this._map);
         if(distance>6){
             return (6/distance)*this._maintenaceCost;
         }
@@ -108,7 +108,7 @@ export class Office extends Commercial{
      * @returns Revenue earned by office in one month
      */
     public revenueEarned(): number {
-        let distance: number = this._map.typeBfs(this._xPosition, this._yPosition, "Residential");
+        let distance: number = this._map.typeBfs(this._xPosition, this._yPosition, "Residential", this._map);
         if(distance>6){
             return (6/distance)*this._revenue;
         }
@@ -128,7 +128,7 @@ export class Office extends Commercial{
      * @returns Maintenance cost of office in one month
      */
     public maintenanceLost(): number {
-        let distance: number = this._map.typeBfs(this._xPosition, this._yPosition, "Residential");
+        let distance: number = this._map.typeBfs(this._xPosition, this._yPosition, "Residential", this._map);
         if(distance>6){
             return (6/distance)*this._maintenaceCost;
         }
@@ -183,7 +183,7 @@ export class Restaurant extends Commercial{
      * @returns Revenue earned by restaurant in one month
      */
     public revenueEarned(): number {
-        let distance: number = this._map.typeBfs(this._xPosition, this._yPosition, "Residential");
+        let distance: number = this._map.typeBfs(this._xPosition, this._yPosition, "Residential", this._map);
         if(distance>6){
             return (6/distance)*this._revenue;
         }
@@ -203,7 +203,7 @@ export class Restaurant extends Commercial{
      * @returns Maintenace cost of restaurant in one month
      */
     public maintenanceLost(): number {
-        let distance: number = this._map.typeBfs(this._xPosition, this._yPosition, "Residential");
+        let distance: number = this._map.typeBfs(this._xPosition, this._yPosition, "Residential", this._map);
         if(distance>6){
             return (6/distance)*this._maintenaceCost;
         }
