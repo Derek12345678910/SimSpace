@@ -123,10 +123,14 @@ export class Map {
     }   
 
     // The directions the BFS goes in
-    private bfsDirections: Array<Pair> = [
+    private _bfsDirections: Array<Pair> = [
         new Pair(0, -1), new Pair(0, 1), new Pair(-1, 0), new Pair(1, 0),
         new Pair(-1, -1), new Pair(1, -1), new Pair(-1, 1), new Pair(1, 1)
     ];
+
+    public get bfsDirections(): Array<Pair>{
+        return this._bfsDirections;
+    }
 
     /**
      * Search for closest Plot with certain name
@@ -150,7 +154,6 @@ export class Map {
             let cur : Pair = q.dequeue() as Pair;
             let dis : number = vis.getCoord(cur.key, cur.val) as number;
             let curObject : Plot = map._grid.getCoord(cur.key, cur.val) as Plot
-
             // if you hit the target
             if(curObject.name === targetName){
                 return dis;
@@ -160,7 +163,7 @@ export class Map {
                 let direction : Pair = map.bfsDirections[i];
                 let nxt : Pair = new Pair(cur.key + direction.key, cur.val + direction.val);
                 // check if the new coord is not visited and is inside the map
-                if(vis.getCoord(nxt.key, nxt.val) !== -1 && nxt.key >= 0 && nxt.key < map.mapSizeX && nxt.val >= 0 && nxt.val < map.mapSizeY){
+                if(vis.getCoord(nxt.key, nxt.val) === -1 && nxt.key >= 0 && nxt.key < map.mapSizeX && nxt.val >= 0 && nxt.val < map.mapSizeY){
                     vis.setCoord(nxt.key, nxt.val, dis + 1);
                     q.enqueue(nxt);
                 }
@@ -202,7 +205,7 @@ export class Map {
                 let direction : Pair = this.bfsDirections[i];
                 let nxt : Pair = new Pair(cur.key + direction.key, cur.val + direction.val);
                 // check if the new coord is not visited and is inside the map
-                if(vis.getCoord(nxt.key, nxt.val) !== -1 && nxt.key >= 0 && nxt.key < this._mapSizeX && nxt.val >= 0 && nxt.val < this.mapSizeY){
+                if(vis.getCoord(nxt.key, nxt.val) === -1 && nxt.key >= 0 && nxt.key < this._mapSizeX && nxt.val >= 0 && nxt.val < this.mapSizeY){
                     vis.setCoord(nxt.key, nxt.val, dis + 1);
                     q.enqueue(nxt);
                 }
@@ -246,6 +249,7 @@ export class Map {
      */
     public searchRange(x : number, y : number, targetName : string, range : number, bfsFunc : any) : boolean {
         let search : number = bfsFunc(x, y, targetName, this)
+        console.log(search);
         // inside range
         if(search <= range && search !== -1){
             return true;

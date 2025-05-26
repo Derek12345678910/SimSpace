@@ -147,7 +147,7 @@ export class Game {
         this.collectPopulation();
         this._money += this.collectRevenue();
         this._money -= this.collectMaintenance();
-        this._pollution = this.collectPollution();
+        this._pollution += this.collectPollution();
         this._score = this.calculateScores();
         this._power += this.collectPower();
     }
@@ -256,8 +256,12 @@ export class Game {
 
         for(let i=0; i<this._map.mapSizeY; i++){
             for(let j=0; j<this._map.mapSizeX; j++){
-                let pollutionAmount : number = this._map.getPollutionCoord(j, i) as number;
-                pollutionMonth += pollutionAmount;                
+                let plotObject : Facility = this._map.getGridCoord(j, i) as Facility;
+                if(Map.checkFacility(plotObject)){
+                    // add the pollution of the facility
+                    pollutionMonth += plotObject.pollutionGenerated();
+                }
+                
             }
         }
         return pollutionMonth;

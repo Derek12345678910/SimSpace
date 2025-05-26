@@ -160,7 +160,7 @@ export class EnvironmentalFacility extends Industrial{
         let problems : List<string> = new List<string>();
         if(!map.searchRange(x, y, "Power Plant", 6, map.plotBfs)){ problems.push("Power Plant") }
 
-        return problems;
+        return problems; 
     }
     public fullyFunctional(): List<string> {
         let problems : List<string> = new List<string>();
