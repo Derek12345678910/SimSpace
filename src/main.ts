@@ -75,6 +75,7 @@ function changeBuilds(type : string) : void{
             });
             container.appendChild(newButton);
         }
+        console.log(objects);
     }
     else if(type === "industrial"){
         let objects = Object.values(industrial)
@@ -120,6 +121,59 @@ let buildFunctions : BuildFunction = new BuildFunction(WORLD.map);
 async function placeObject(objName : string){
     CANVAS.selectedCell = null;
     let selectedCell = await waitForCellSelect();   
+    console.log(selectedCell);
+        if(objName === "Rock"){
+        console.log(buildFunctions.buildRock(selectedCell.key, selectedCell.val, WORLD.money));
+    }
+    else if(objName === "Tree"){
+        console.log(buildFunctions.buildTree(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "Factory"){
+        console.log(buildFunctions.buildFactory(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "EnvironmentalFacility"){
+        console.log(buildFunctions.buildEnvironmentalFacility(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "Warehouse"){
+        console.log(buildFunctions.buildWarehouse(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "Power Plant"){
+        console.log(buildFunctions.buildPowerPlant(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "EmergencyService"){
+        console.log(buildFunctions.buildEmergencyService(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "EducationCentre"){
+        console.log(buildFunctions.buildEducationCentre(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "Medical"){
+        console.log(buildFunctions.buildMedicalFacility(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "Government"){
+        console.log(buildFunctions.buildGovernmentFacility(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "ComfortableHome"){
+        console.log(buildFunctions.buildComfortableHome(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "AffordableHome"){
+        console.log(buildFunctions.buildAffordableHome(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "LuxuryHome"){
+        console.log(buildFunctions.buildLuxuryHome(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "Restaurant"){
+        console.log(buildFunctions.buildRestaurant(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "Office"){
+        console.log(buildFunctions.buildOffice(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "Store"){
+        console.log(buildFunctions.buildStore(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    else if(objName === "PlanetaryDefenseSystem"){
+        console.log(buildFunctions.buildPlanetaryDefenseSystem(selectedCell.key, selectedCell.val,WORLD.money));
+    }
+    console.log(WORLD.map);
     // check code here     
 }
 
