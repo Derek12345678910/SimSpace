@@ -15,7 +15,7 @@ import { List } from "./datastructures/list.js";
 const WORLD : Game = new Game(50, 50, 10);
 
 const CANVAS : GameCanvas = new GameCanvas(WORLD.map)
-const BuildFunctions :BuildFunction = new BuildFunction(WORLD.map);
+const buildFunctions : BuildFunction = new BuildFunction(WORLD.map);
 
 // if the timer is running or not
 let timeOn: boolean = true;
@@ -181,8 +181,6 @@ function changeBuilds(type : string) : void{
     }
 }
 
-let buildFunctions : BuildFunction = new BuildFunction(WORLD.map);
-
 /**
  * Place the object of the indicated button
  * @param objName the name of the object
@@ -251,7 +249,6 @@ async function placeObject(objName : string){
     for(let i=0; i<problems.length; i++){
         RESPONDER.innerText += `${problems.get(i)} \n`
     }
-    CANVAS.draw();
 }
 
 /**

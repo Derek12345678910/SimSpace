@@ -1,4 +1,5 @@
 import { Map } from "./objects/map.js";
+import { Plot } from "./objects/plot.js";
 
 import { Pair } from "./datastructures/pair.js";
 
@@ -68,7 +69,6 @@ export class GameCanvas {
         this.isDragging = true;
         this.dragStartX = e.clientX - this.originX;
         this.dragStartY = e.clientY - this.originY;
-        this.draw()
     }
 
     private handleMouseMove(e: MouseEvent) {
@@ -140,6 +140,18 @@ export class GameCanvas {
             this.ctx.moveTo(-totalWidth / 2, posY);
             this.ctx.lineTo(totalWidth / 2, posY);
             this.ctx.stroke();
+        }
+
+        // Draw images inside the grid
+        for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < cols; x++) {
+                const posX = x * this.cellWidth - totalWidth / 2;
+                const posY = y * this.cellHeight - totalHeight / 2;
+
+                let cell : Plot = this.world.getGridCoord(x, y) as Plot;
+                const img = cell.image;
+                this.ctx.drawImage(img, posX, posY, this.cellWidth, this.cellHeight);
+            }
         }
         
         if(this._selectedCell !== null){

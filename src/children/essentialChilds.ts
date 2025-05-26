@@ -286,7 +286,7 @@ export class Government extends Essential{
         this._xPosition = x;
         this._yPosition = y;
         this._image = new Image();
-        this._image.src = "../src/assets/government-imagfe.png"
+        this._image.src = "../src/assets/government-image.png"
 
     }
     public override updateMonth(): void {
