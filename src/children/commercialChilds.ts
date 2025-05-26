@@ -21,6 +21,7 @@ export class Store extends Commercial{
         this._maintenaceCost = 50000;
         this._powerCost = 5;
         this._pollution = 500;
+        this._powerGeneration = 0;
 
         this._xPosition = x;
         this._yPosition = y;
@@ -97,6 +98,7 @@ export class Office extends Commercial{
         this._maintenaceCost = 5000;
         this._powerCost = 15;
         this._pollution = 800;
+        this._powerGeneration = 0;
 
         this._xPosition = x;
         this._yPosition = y;
@@ -173,6 +175,7 @@ export class Restaurant extends Commercial{
         this._powerCost = 5;
         this._pollution = 300;
         this._reversePollution = 0;
+        this._powerGeneration = 0;
 
         this._xPosition = x;
         this._yPosition = y;

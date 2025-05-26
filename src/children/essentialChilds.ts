@@ -50,6 +50,7 @@ export class PowerPlant extends Essential{
         return super.pollutionGenerated();
     }
 
+
     /**
      * Power Plant maintenance cost 
      * @returns Maintenance cost lost in one month

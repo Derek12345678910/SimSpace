@@ -47,6 +47,8 @@ function tickTime():void{
         if(timeOn){
             seconds++
             updateTimeDisplay();
+            CANVAS.draw();
+            updateTexts();
             if(seconds%10 === 0){
                 WORLD.updateNewMonth();
                 updateTexts();
@@ -149,7 +151,6 @@ function changeBuilds(type : string) : void{
             });
             container.appendChild(newButton);
         }
-        console.log(objects);
     }
     else if(type === "industrial"){
         let objects = Object.values(industrial)
@@ -211,7 +212,7 @@ async function placeObject(objName : string){
     else if(objName === "Warehouse"){
         problems = (buildFunctions.buildWarehouse(selectedCell.key, selectedCell.val,WORLD.money));
     }
-    else if(objName === "Power Plant"){
+    else if(objName === "PowerPlant"){
         problems = (buildFunctions.buildPowerPlant(selectedCell.key, selectedCell.val,WORLD.money));
     }
     else if(objName === "EmergencyService"){

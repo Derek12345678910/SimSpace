@@ -141,7 +141,7 @@ export class Game {
         this._money -= this.collectMaintenance();
         this._pollution = this.collectPollution();
         this._score = this.calculateScores();
-        this._power -= this.collectPower();
+        this._power += this.collectPower();
     }
 
     /**
@@ -266,7 +266,8 @@ export class Game {
                 let plotObject : Facility = this._map.getGridCoord(j, i) as Facility;
                 // check for facility type
                 if(Map.checkFacility(plotObject)){
-                    powerMonth += plotObject.powerCost;
+                    powerMonth -= plotObject.powerCost;
+                    powerMonth += plotObject.powerGenerated;
                 }             
             }
         }

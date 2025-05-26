@@ -7,6 +7,7 @@ export abstract class Facility extends Plot{
     protected _revenue: number;
     protected _pollution: number;
     protected _reversePollution: number;
+    protected _powerGeneration: number;
     
 
     protected constructor(name: string, buildCost : number, map : Map){
@@ -30,6 +31,10 @@ export abstract class Facility extends Plot{
     }
     get reversePollution(): number{
         return this._reversePollution;
+    }
+
+    get powerGenerated(): number{
+        return this._powerGeneration;
     }
 
     public abstract revenueEarned(): number

@@ -24,6 +24,7 @@ export class Factory extends Industrial{
         this._powerCost = 50;
         this._pollution = 20000;
         this._reversePollution = 0;
+        this._powerGeneration = 0;;
 
         this.finalMaintenance = 500000;
         this.months = 5;
@@ -108,6 +109,7 @@ export class EnvironmentalFacility extends Industrial{
         this._powerCost = 75;
         this._pollution = 0;
         this._reversePollution = 30000;
+        this._powerGeneration = 0;
 
         this.finalMaintenance = 3000000;
         this.months = 0;
@@ -186,6 +188,7 @@ export class Warehouse extends Industrial{
         this._powerCost = 10;
         this._pollution = 0;
         this._reversePollution = 0;
+        this._powerGeneration = 0;
 
         this.finalMaintenance = 500000;
         this.months = 0;

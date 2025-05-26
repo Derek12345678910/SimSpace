@@ -21,6 +21,7 @@ export class AffordableHome extends Residential{
         this._revenue = 0;
         this._pollution = 0;
         this._reversePollution = 0;
+        this._powerGeneration = 0;
 
         this._xPosition = x;
         this._yPosition = y;
@@ -125,6 +126,7 @@ export class LuxuryHome extends Residential{
         this._revenue = 0;
         this._pollution = 0;
         this._reversePollution = 0;
+        this._powerGeneration = 0;
 
         this._xPosition = x;
         this._yPosition = y;
@@ -236,6 +238,7 @@ export class ComfortableHome extends Residential{
         this._revenue = 0;
         this._pollution = 0;
         this._reversePollution = 0;
+        this._powerGeneration =0;
         
         this._xPosition = x;
         this._yPosition = y;
