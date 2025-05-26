@@ -1,5 +1,4 @@
 import { Game } from "./objects/game.js";
-import { BuildFunction } from "./objects/buildfunctions.js";
 import { GameCanvas } from "./graphics.js";
 
 import { BuildFunction } from "./objects/buildfunctions.js";
@@ -103,7 +102,7 @@ function updateTexts() : void{
     HAPPYPOPULATION.innerText = `Happy Population: ${WORLD.happypopulation}`;
     CONTENTPOPULATION.innerText = `Content Population: ${WORLD.contentpopulation}`;
     POWER.innerText = `Power: ${WORLD.power}`;
-    POLLUTION.innerText = `Pollution ${WORLD.pollution}`;
+    POLLUTION.innerText = `Pollution: ${WORLD.pollution}`;
 
 }
 
@@ -224,62 +223,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+})
 let x: number = 0;
 let y: number = 0;
 
-function placeObject(objName : string): void{
-    if(objName === "Rock"){
-        BuildFunctions.buildRock(x, y, WORLD.money);
-    }
-    else if(objName === "Tree"){
-        BuildFunctions.buildTree(x,y,WORLD.money);
-    }
-    else if(objName === "Factory"){
-        BuildFunctions.buildFactory(x,y,WORLD.money);
-    }
-    else if(objName === "Environmental Facility"){
-        BuildFunctions.buildEnvironmentalFacility(x,y,WORLD.money);
-    }
-    else if(objName === "Warehouse"){
-        BuildFunctions.buildWarehouse(x,y,WORLD.money);
-    }
-    else if(objName === "Power Plant"){
-        BuildFunctions.buildPowerPlant(x,y,WORLD.money);
-    }
-    else if(objName === "Emergency Service"){
-        BuildFunctions.buildEmergencyService(x,y,WORLD.money);
-    }
-    else if(objName === "Education Centre"){
-        BuildFunctions.buildEducationCentre(x,y,WORLD.money);
-    }
-    else if(objName === "Medical Facility"){
-        BuildFunctions.buildMedicalFacility(x,y,WORLD.money);
-    }
-    else if(objName === "Government Facility"){
-        BuildFunctions.buildGovernmentFacility(x,y,WORLD.money);
-    }
-    else if(objName === "Comfortable Home"){
-        BuildFunctions.buildComfortableHome(x,y,WORLD.money);
-    }
-    else if(objName === "Affordable Home"){
-        BuildFunctions.buildAffordableHome(x,y,WORLD.money);
-    }
-    else if(objName === "Luxury Home"){
-        BuildFunctions.buildLuxuryHome(x,y,WORLD.money);
-    }
-    else if(objName === "Restaurant"){
-        BuildFunctions.buildRestaurant(x,y,WORLD.money);
-    }
-    else if(objName === "Office"){
-        BuildFunctions.buildOffice(x,y,WORLD.money);
-    }
-    else if(objName === "Store"){
-        BuildFunctions.buildStore(x,y,WORLD.money);
-    }
-    else if(objName === "Planetary Defense System"){
-        BuildFunctions.buildPlanetaryDefenseSystem(x,y,WORLD.money);
-    }
-}
+
 
 // show texts at start
 updateTexts();
