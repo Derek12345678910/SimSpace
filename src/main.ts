@@ -34,6 +34,11 @@ function updateTimeDisplay(): void{
     TIMEDISPLAY.innerText = `New month in: ${10-(seconds%10)} \n Month: ${Math.floor(seconds/10)}`
 }
 
+export function gameOver(){
+    const OVER = document.getElementById("OVER") as HTMLElement;
+    OVER.hidden = false;
+}
+
 /**
  * Ticks the time by 1 second, if the time is a multiple of 10, updates new month
  */

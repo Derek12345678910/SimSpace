@@ -10,6 +10,8 @@ import { Commercial } from "./commercial.js";
 import { Industrial } from "./industrial.js";
 import { Essential } from "./essential.js";
 
+import { gameOver } from "../main.js";
+
 import { Pair } from "../datastructures/pair.js"
 import { List } from "../datastructures/list.js"
   
@@ -120,8 +122,11 @@ export class Game {
      * Called every month to update the world
      */
     public updateNewMonth() : void {
-        console.log("new month");
+        console.log("New Month");
         this.checkEvents();
+        if(this.eventCalender.length !== 0){
+            gameOver();
+        }
 
         this._time += 10;
 
@@ -143,11 +148,13 @@ export class Game {
      * Checks if any natural events will happen
      */
     private checkEvents() : void{
-        if(GlobalEventObjects.AlienInvasion.checkEvent() === true){
-            this.eventCalender.push(new Pair(this._time, new GlobalEventObjects.AlienInvasion(this._time)))
-        }
-        if(GlobalEventObjects.Asteroid.checkEvent() === true){
-            this.eventCalender.push(new Pair(this._time, new GlobalEventObjects.Asteroid(this._time)))
+        if(this._map.defenseSystem === null){
+            if(GlobalEventObjects.AlienInvasion.checkEvent() === true){
+                this.eventCalender.push(new Pair(this._time, new GlobalEventObjects.AlienInvasion(this._time)))
+            }
+            if(GlobalEventObjects.Asteroid.checkEvent() === true){
+                this.eventCalender.push(new Pair(this._time, new GlobalEventObjects.Asteroid(this._time)))
+            }
         }
     }
 
