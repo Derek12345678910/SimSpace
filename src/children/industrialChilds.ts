@@ -137,7 +137,6 @@ export class EnvironmentalFacility extends Industrial{
      * @returns Pollution reduced in one month
      */
     public pollutionReduced(): number{
-        // retrun the polluton grid
         return this._reversePollution;
     }
 

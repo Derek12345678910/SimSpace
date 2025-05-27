@@ -14,6 +14,9 @@ import { gameOver } from "../main.js";
 
 import { Pair } from "../datastructures/pair.js"
 import { List } from "../datastructures/list.js"
+import { Matrix } from "../datastructures/matrix.js";
+import { Queue } from "../datastructures/queue.js";
+import { EnvironmentalFacility } from "../children/industrialChilds.js";
   
 /**
  * Class for Game Logic
@@ -30,6 +33,7 @@ export class Game {
     private _timePerMonth : number;
     private _map : Map;
     private _power: number = 0;
+    private _selectedButton : string | null = null;
 
     private eventCalender : List<Pair> = new List<Pair>();
 
@@ -124,6 +128,14 @@ export class Game {
      */
     public get timePerMonth() : number{
         return this._timePerMonth;
+    }
+
+    public get selectedButton() : string | null{
+        return this._selectedButton
+    }
+
+    public set selectedButton(name : string | null){
+        this._selectedButton = name;
     }
 
     /**
@@ -262,6 +274,38 @@ export class Game {
                     plotObject.pollutionGenerated();
                     let pollutionAmount : number = this._map.getPollutionCoord(j, i) as number;
                     pollutionMonth += pollutionAmount;   
+                }
+                if(plotObject instanceof EnvironmentalFacility){
+                    // specifically do the enviormental up to 10 units                    
+                    let q : Queue<Pair> = new Queue<Pair>();
+
+                    let plotObject2 : EnvironmentalFacility = this._map.getGridCoord(j, i) as EnvironmentalFacility;
+            
+                    // a matrix holding the distances of each unit relative to the starting point
+                    let vis : Matrix<number> = new Matrix<number>(this._map.mapSizeX, this._map.mapSizeY, -1);
+            
+                    q.enqueue(new Pair(j, i));
+                    vis.setCoord(j, i, 0); // set start 0
+            
+                    while(!q.isEmpty()){
+            
+                        let cur : Pair = q.dequeue() as Pair;
+                        let dis : number = vis.getCoord(cur.key, cur.val) as number;
+                        let curPollution : number = this._map.pollutionGrid.getCoord(j, i) as number;
+            
+                        for(let i=0; i<this._map.bfsDirections.length; i++){
+                            let direction : Pair = this._map.bfsDirections[i];
+                            let nxt : Pair = new Pair(cur.key + direction.key, cur.val + direction.val);
+                            // check if the new coord is not visited and is inside the map
+                            if(vis.getCoord(nxt.key, nxt.val) === -1 && nxt.key >= 0 && nxt.key < this._map.mapSizeX && nxt.val >= 0 && nxt.val < this._map.mapSizeY && vis.getCoord(nxt.key, nxt.val) as number <= 10){
+                                console.log(curPollution)
+                                vis.setCoord(nxt.key, nxt.val, dis + 1);
+                                curPollution -= plotObject2.pollutionReduced();
+                                if(curPollution < 0) curPollution = 0;
+                                q.enqueue(nxt);
+                            }
+                        }
+                    } 
                 }
             }
         }

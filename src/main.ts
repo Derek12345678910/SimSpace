@@ -11,6 +11,7 @@ import * as residential from "./children/residentialChilds.js";
 
 import { Pair } from "./datastructures/pair.js";
 import { List } from "./datastructures/list.js";
+import { join } from "path";
 
 const WORLD : Game = new Game(50, 50, 10);
 
@@ -22,20 +23,10 @@ let timeOn: boolean = true;
 
 // button that toggles the timer on and off
 const TOGGLEBUTTON = document.getElementById("toggle-time") as HTMLButtonElement;
-// where the time is displayed
 const TIMEDISPLAY = document.getElementById("time-display") as HTMLElement;
 
-// interval that ticks every month
 let monthInterval: ReturnType<typeof setInterval> | null = null;
-
-// number of seconds that have passed 
 let seconds: number = 0;
-
-// current selected facility name
-let selectedObjectName: string | null = null;
-
-// if building is being placed or not
-let placingInProgress: boolean = false;
 
 /**
  * Displays time until new month and how many months have passed
@@ -135,10 +126,7 @@ function changeBuilds(type : string) : void{
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
             newButton.addEventListener("click", () => {
-                if(!placingInProgress){
-                    selectedObjectName = objects[i].name;
-                    placeObjectOnce();
-                }
+                placeObject(objects[i].name);
             });
             container.appendChild(newButton);
         }
@@ -149,10 +137,7 @@ function changeBuilds(type : string) : void{
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
             newButton.addEventListener("click", () => {
-                if(!placingInProgress){
-                    selectedObjectName = objects[i].name;
-                    placeObjectOnce();
-                }
+                placeObject(objects[i].name);
             });
             container.appendChild(newButton);
         }
@@ -163,10 +148,7 @@ function changeBuilds(type : string) : void{
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
             newButton.addEventListener("click", () => {
-                if(!placingInProgress){
-                    selectedObjectName = objects[i].name;
-                    placeObjectOnce();
-                }
+                placeObject(objects[i].name);
             });
             container.appendChild(newButton);
         }
@@ -177,10 +159,7 @@ function changeBuilds(type : string) : void{
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
             newButton.addEventListener("click", () => {
-                if(!placingInProgress){
-                    selectedObjectName = objects[i].name;
-                    placeObjectOnce();
-                }
+                placeObject(objects[i].name);
             });
             container.appendChild(newButton);
         }
@@ -191,10 +170,7 @@ function changeBuilds(type : string) : void{
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
             newButton.addEventListener("click", () => {
-                if(!placingInProgress){
-                    selectedObjectName = objects[i].name;
-                    placeObjectOnce();
-                }
+                placeObject(objects[i].name);
             });
             container.appendChild(newButton);
         }
@@ -205,147 +181,102 @@ function changeBuilds(type : string) : void{
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
             newButton.addEventListener("click", () => {
-                if(!placingInProgress){
-                    selectedObjectName = objects[i].name;
-                    placeObjectOnce();
-                }
+                placeObject(objects[i].name);
             });
             container.appendChild(newButton);
         }
     }
 }
 
+// Global token for tracking the latest placeObject call
+let currentPlaceObjectToken = 0;
 /**
  * Place the object of the indicated button
  * @param objName the name of the object
  */
-async function placeObject(objName : string){
+async function placeObject(objName: string) {
+    // Cancel any in-progress placement
+    const myToken = ++currentPlaceObjectToken;
+
+    // Always update selected button immediately
+    WORLD.selectedButton = objName;
+
+    // Don't trigger cell selection if one already in progress
+    if (CANVAS.selectedCell !== null) return;
+
     CANVAS.selectedCell = null;
-    let selectedCell = await waitForCellSelect();  
-    let problems : List<string> = new List<string>(); 
+    let selectedCell = await waitForCellSelect();
+
+    // If a newer call was made, exit early
+    if (myToken !== currentPlaceObjectToken) return;
+
+    let problems: List<string> = new List<string>();
+    let selectedButton: string = WORLD.selectedButton!;
     const RESPONDER = document.getElementById("responder") as HTMLElement;
-    console.log(selectedCell);
-        if(objName === "Rock"){
-        problems = (buildFunctions.buildRock(selectedCell.key, selectedCell.val, WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - land.Rock.buildCost;
-        }
+
+    if (selectedButton === "Rock") {
+        problems = buildFunctions.buildRock(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= land.Rock.buildCost;
+    } else if (selectedButton === "Tree") {
+        problems = buildFunctions.buildTree(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= land.Tree.buildCost;
+    } else if (selectedButton === "Factory") {
+        problems = buildFunctions.buildFactory(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= industrial.Factory.buildCost;
+    } else if (selectedButton === "EnvironmentalFacility") {
+        problems = buildFunctions.buildEnvironmentalFacility(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= industrial.EnvironmentalFacility.buildCost;
+    } else if (selectedButton === "Warehouse") {
+        problems = buildFunctions.buildWarehouse(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= industrial.Warehouse.buildCost;
+    } else if (selectedButton === "PowerPlant") {
+        problems = buildFunctions.buildPowerPlant(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= essential.PowerPlant.buildCost;
+    } else if (selectedButton === "EmergencyService") {
+        problems = buildFunctions.buildEmergencyService(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= essential.EmergencyService.buildCost;
+    } else if (selectedButton === "EducationCentre") {
+        problems = buildFunctions.buildEducationCentre(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= essential.EducationCentre.buildCost;
+    } else if (selectedButton === "Medical") {
+        problems = buildFunctions.buildMedicalFacility(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= essential.Medical.buildCost;
+    } else if (selectedButton === "Government") {
+        problems = buildFunctions.buildGovernmentFacility(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= essential.Government.buildCost;
+    } else if (selectedButton === "ComfortableHome") {
+        problems = buildFunctions.buildComfortableHome(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= residential.ComfortableHome.buildCost;
+    } else if (selectedButton === "AffordableHome") {
+        problems = buildFunctions.buildAffordableHome(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= residential.AffordableHome.buildCost;
+    } else if (selectedButton === "LuxuryHome") {
+        problems = buildFunctions.buildLuxuryHome(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= residential.LuxuryHome.buildCost;
+    } else if (selectedButton === "Restaurant") {
+        problems = buildFunctions.buildRestaurant(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= commercial.Restaurant.buildCost;
+    } else if (selectedButton === "Office") {
+        problems = buildFunctions.buildOffice(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= commercial.Office.buildCost;
+    } else if (selectedButton === "Store") {
+        problems = buildFunctions.buildStore(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= commercial.Store.buildCost;
+    } else if (selectedButton === "PlanetaryDefenseSystem") {
+        problems = buildFunctions.buildPlanetaryDefenseSystem(selectedCell.key, selectedCell.val, WORLD.money);
+        if (problems.length === 0) WORLD.money -= plot.PlanetaryDefenseSystem.buildCost;
     }
-    else if(objName === "Tree"){
-        problems = (buildFunctions.buildTree(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - land.Tree.buildCost;
-        }
-    }
-    else if(objName === "Factory"){
-        problems = (buildFunctions.buildFactory(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - industrial.Factory.buildCost;
-        }
-    }
-    else if(objName === "EnvironmentalFacility"){
-        problems = (buildFunctions.buildEnvironmentalFacility(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - industrial.EnvironmentalFacility.buildCost;
-        }
-    }
-    else if(objName === "Warehouse"){
-        problems = (buildFunctions.buildWarehouse(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - industrial.Warehouse.buildCost;
-        }
-    }
-    else if(objName === "PowerPlant"){
-        problems = (buildFunctions.buildPowerPlant(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - essential.PowerPlant.buildCost;
-        }
-    }
-    else if(objName === "EmergencyService"){
-        problems = (buildFunctions.buildEmergencyService(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - essential.EmergencyService.buildCost;
-        }
-    }
-    else if(objName === "EducationCentre"){
-        problems = (buildFunctions.buildEducationCentre(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - essential.EducationCentre.buildCost;
-        }
-    }
-    else if(objName === "Medical"){
-        problems = (buildFunctions.buildMedicalFacility(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - essential.Medical.buildCost;
-        }
-    }
-    else if(objName === "Government"){
-        problems = (buildFunctions.buildGovernmentFacility(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - essential.Government.buildCost;
-        }
-    }
-    else if(objName === "ComfortableHome"){
-        problems = (buildFunctions.buildComfortableHome(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - residential.ComfortableHome.buildCost;
-        }
-    }
-    else if(objName === "AffordableHome"){
-        problems = (buildFunctions.buildAffordableHome(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - residential.AffordableHome.buildCost;
-        }
-    }
-    else if(objName === "LuxuryHome"){
-        problems = (buildFunctions.buildLuxuryHome(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - residential.LuxuryHome.buildCost;
-        }
-    }
-    else if(objName === "Restaurant"){
-        problems = (buildFunctions.buildRestaurant(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - commercial.Restaurant.buildCost;
-        }
-    }
-    else if(objName === "Office"){
-        problems = (buildFunctions.buildOffice(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - commercial.Office.buildCost;
-        }
-    }
-    else if(objName === "Store"){
-        problems = (buildFunctions.buildStore(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - commercial.Store.buildCost;
-        }
-    }
-    else if(objName === "PlanetaryDefenseSystem"){
-        problems = (buildFunctions.buildPlanetaryDefenseSystem(selectedCell.key, selectedCell.val,WORLD.money));
-        if(problems.length === 0){
-            WORLD.money = WORLD.money - plot.PlanetaryDefenseSystem.buildCost;
-        }
-    }
+
     console.log(WORLD.map);
-    console.log(problems)
+    console.log(problems);
+
     CANVAS.selectedCell = null;
+    WORLD.selectedButton = null;
     RESPONDER.innerText = "";
-    for(let i=0; i<problems.length; i++){
-        RESPONDER.innerText += `${problems.get(i)} \n`
+    for (let i = 0; i < problems.length; i++) {
+        RESPONDER.innerText += `${problems.get(i)} \n`;
     }
 }
-
-function placeObjectOnce(): void {
-    if (selectedObjectName === null) return;
-    placingInProgress = true;
-    placeObject(selectedObjectName)
-        .finally(() => {
-            placingInProgress = false;
-            selectedObjectName = null; 
-        });
-}
-
 
 /**
  * Waits for the User to select a cell
