@@ -130,7 +130,6 @@ export class Game {
      * Called every month to update the world
      */
     public updateNewMonth() : void {
-        console.log("New Month");
         this.checkEvents();
         if(this.eventCalender.length !== 0){
             gameOver();
@@ -145,11 +144,13 @@ export class Game {
             }
         }
         this.collectPopulation();
-        this._money += this.collectRevenue();
         this._money -= this.collectMaintenance();
         this._pollution = this.collectPollution();
         this._score = this.calculateScores();
         this._power += this.collectPower();
+        if(this._power >= 0){
+            this._money += this.collectRevenue();
+        }    
     }
 
     /**

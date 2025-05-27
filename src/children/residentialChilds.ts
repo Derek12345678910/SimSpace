@@ -62,10 +62,16 @@ export class AffordableHome extends Residential{
 
     /**
      * Affordable home pollution generated
-     * @returns Pollution generated in one month
+     * Adds pollution to the grid
      */
-    public override pollutionGenerated(): number {
-        return this._pollutionPerThousand*(Math.floor(this._population/1000));
+    public override pollutionGenerated(): void {
+        let existingPollution = this._map.getPollutionCoord(this._xPosition, this._yPosition);
+        if(existingPollution){
+            this._map.setPollutionGridCoord(this._xPosition, this._yPosition, this._pollutionPerThousand*(Math.floor(this._population/1000))+existingPollution);
+        }
+        else{
+            this._map.setPollutionGridCoord(this._xPosition, this._yPosition, this._pollutionPerThousand*(Math.floor(this._population/1000)));
+        }
     }
     /**
      * Affordable home maintenance cost lost
@@ -169,10 +175,16 @@ export class LuxuryHome extends Residential{
 
     /**
      * Luxury home pollution generated
-     * @returns Pollution generated in one month
+     * Adds pollution to the pollution grid
      */
-    public override pollutionGenerated(): number {
-        return this._pollutionPerThousand*(Math.floor(this._population/1000));
+    public override pollutionGenerated(): void {
+        let existingPollution = this._map.getPollutionCoord(this._xPosition, this._yPosition);
+        if(existingPollution){
+            this._map.setPollutionGridCoord(this._xPosition, this._yPosition, this._pollutionPerThousand*(Math.floor(this._population/1000))+existingPollution);
+        }
+        else{
+            this._map.setPollutionGridCoord(this._xPosition, this._yPosition, this._pollutionPerThousand*(Math.floor(this._population/1000)));
+        }
     }
 
     /**
@@ -258,11 +270,11 @@ export class ComfortableHome extends Residential{
 
     static override isBuildable(x: number, y: number, map: Map) : List<string> {
         let problems : List<string> = new List<string>();
-        if(!map.searchRange(x, y, "PowerPlant", 8, map.plotBfs)){ problems.push("Power Plant") }
-        if(!map.searchRange(x, y, "EmergencyService", 8, map.plotBfs)){ problems.push("Emergency Service Facility") }
-        if(!map.searchRange(x, y, "EducationCentre", 8, map.plotBfs)){ problems.push("Education Centre") }
-        if(!map.searchRange(x, y, "MedicalFacility", 8, map.plotBfs)){ problems.push("Medical Facility") }
-        if(!map.searchRange(x, y, "GovernmentFacility", 8, map.plotBfs)){ problems.push("Government Facility") }
+        if(!map.searchRange(x, y, "Power Plant", 8, map.plotBfs)){ problems.push("Power Plant") }
+        if(!map.searchRange(x, y, "Emergency Service Facility", 8, map.plotBfs)){ problems.push("Emergency Service Facility") }
+        if(!map.searchRange(x, y, "Education Centre", 8, map.plotBfs)){ problems.push("Education Centre") }
+        if(!map.searchRange(x, y, "Medical Facility", 8, map.plotBfs)){ problems.push("Medical Facility") }
+        if(!map.searchRange(x, y, "Government Facility", 8, map.plotBfs)){ problems.push("Government Facility") }
 
         if(!map.searchRange(x, y, "Store", 5, map.plotBfs)){ problems.push("Store") }
 
@@ -281,10 +293,16 @@ export class ComfortableHome extends Residential{
 
     /**
      * Comfortable home pollution generated
-     * @returns Pollution generated in one month
+     * Adds pollution to the grid
      */
-    public override pollutionGenerated(): number {
-        return this._pollutionPerThousand*(Math.floor(this._population/1000));
+    public override pollutionGenerated(): void {
+        let existingPollution = this._map.getPollutionCoord(this._xPosition, this._yPosition);
+        if(existingPollution){
+            this._map.setPollutionGridCoord(this._xPosition, this._yPosition, this._pollutionPerThousand*(Math.floor(this._population/1000))+existingPollution);
+        }
+        else{
+            this._map.setPollutionGridCoord(this._xPosition, this._yPosition, this._pollutionPerThousand*(Math.floor(this._population/1000)));
+        }
     }
 
     /**

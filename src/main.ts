@@ -22,10 +22,20 @@ let timeOn: boolean = true;
 
 // button that toggles the timer on and off
 const TOGGLEBUTTON = document.getElementById("toggle-time") as HTMLButtonElement;
+// where the time is displayed
 const TIMEDISPLAY = document.getElementById("time-display") as HTMLElement;
 
+// interval that ticks every month
 let monthInterval: ReturnType<typeof setInterval> | null = null;
+
+// number of seconds that have passed 
 let seconds: number = 0;
+
+// current selected facility name
+let selectedObjectName: string | null = null;
+
+// if building is being placed or not
+let placingInProgress: boolean = false;
 
 /**
  * Displays time until new month and how many months have passed
@@ -125,7 +135,10 @@ function changeBuilds(type : string) : void{
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
             newButton.addEventListener("click", () => {
-                placeObject(objects[i].name);
+                if(!placingInProgress){
+                    selectedObjectName = objects[i].name;
+                    placeObjectOnce();
+                }
             });
             container.appendChild(newButton);
         }
@@ -136,7 +149,10 @@ function changeBuilds(type : string) : void{
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
             newButton.addEventListener("click", () => {
-                placeObject(objects[i].name);
+                if(!placingInProgress){
+                    selectedObjectName = objects[i].name;
+                    placeObjectOnce();
+                }
             });
             container.appendChild(newButton);
         }
@@ -147,7 +163,10 @@ function changeBuilds(type : string) : void{
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
             newButton.addEventListener("click", () => {
-                placeObject(objects[i].name);
+                if(!placingInProgress){
+                    selectedObjectName = objects[i].name;
+                    placeObjectOnce();
+                }
             });
             container.appendChild(newButton);
         }
@@ -158,7 +177,10 @@ function changeBuilds(type : string) : void{
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
             newButton.addEventListener("click", () => {
-                placeObject(objects[i].name);
+                if(!placingInProgress){
+                    selectedObjectName = objects[i].name;
+                    placeObjectOnce();
+                }
             });
             container.appendChild(newButton);
         }
@@ -169,7 +191,10 @@ function changeBuilds(type : string) : void{
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
             newButton.addEventListener("click", () => {
-                placeObject(objects[i].name);
+                if(!placingInProgress){
+                    selectedObjectName = objects[i].name;
+                    placeObjectOnce();
+                }
             });
             container.appendChild(newButton);
         }
@@ -180,7 +205,10 @@ function changeBuilds(type : string) : void{
             let newButton = document.createElement("button")
             newButton.innerText = objects[i].name;
             newButton.addEventListener("click", () => {
-                placeObject(objects[i].name);
+                if(!placingInProgress){
+                    selectedObjectName = objects[i].name;
+                    placeObjectOnce();
+                }
             });
             container.appendChild(newButton);
         }
@@ -307,6 +335,17 @@ async function placeObject(objName : string){
         RESPONDER.innerText += `${problems.get(i)} \n`
     }
 }
+
+function placeObjectOnce(): void {
+    if (selectedObjectName === null) return;
+    placingInProgress = true;
+    placeObject(selectedObjectName)
+        .finally(() => {
+            placingInProgress = false;
+            selectedObjectName = null; 
+        });
+}
+
 
 /**
  * Waits for the User to select a cell

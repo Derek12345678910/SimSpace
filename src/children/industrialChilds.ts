@@ -58,7 +58,7 @@ export class Factory extends Industrial{
 
     /**
      * Factory pollution
-     * @returns Pollution generated in one month
+     * Adds pollution to the pollution grid
      */    
     public pollutionGenerated(): void {
         let existingPollution = this._map.getPollutionCoord(this._xPosition, this._yPosition);
@@ -143,10 +143,16 @@ export class EnvironmentalFacility extends Industrial{
 
     /**
      * Environmental facility pollution generated
-     * @returns Pollution generated in one month
+     * Adds the pollution generated to the pollution grid
      */
-    public override pollutionGenerated(): number {
-        return this._pollution;
+    public override pollutionGenerated(): void {
+        let existingPollution = this._map.getPollutionCoord(this._xPosition, this._yPosition);
+        if(existingPollution){
+            this._map.setPollutionGridCoord(this._xPosition, this._yPosition, this._pollution+existingPollution);
+        }
+        else{
+            this._map.setPollutionGridCoord(this._xPosition, this._yPosition, this._pollution);
+        }
     }
     
     /**
@@ -227,10 +233,16 @@ export class Warehouse extends Industrial{
 
     /**
      * Warehouse pollution
-     * @returns Pollution generated in one month
+     * Adds the pollution to the pollution grid
      */
-    public override pollutionGenerated(): number {
-        return this._maintenaceCost;
+    public override pollutionGenerated(): void {
+        let existingPollution = this._map.getPollutionCoord(this._xPosition, this._yPosition);
+        if(existingPollution){
+            this._map.setPollutionGridCoord(this._xPosition, this._yPosition, this._pollution+existingPollution);
+        }
+        else{
+            this._map.setPollutionGridCoord(this._xPosition, this._yPosition, this._pollution);
+        }
     }
 
     /**
